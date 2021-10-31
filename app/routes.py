@@ -1,5 +1,5 @@
 from app import app 
-
+from flask import render_template
 
 ''' All Handlers go here. For example: 
     Login function -> login(),
@@ -19,9 +19,7 @@ def index():
 # Login Page
 @app.route("/login")
 def login():
-    return ("Login Page :)")
-
-
+    return render_template('login.html')
 
 
 
