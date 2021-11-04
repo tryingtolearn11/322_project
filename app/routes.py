@@ -23,6 +23,11 @@ def login():
     form = LoginForm()
     return render_template('login.html', title='Sign In', form=form)
 
+# User Info Page
+@app.route("/info")
+def info():
+    return render_template('info.html')
+
 
 
 
