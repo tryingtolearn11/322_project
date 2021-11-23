@@ -31,6 +31,11 @@ def account():
     userPackage = userInfo()
     return render_template('account.html', packages=userPackage)
 
+# Register Page
+@app.route("/register")
+def register():
+    return render_template('register.html')
+
 
 
 
