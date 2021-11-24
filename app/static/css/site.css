@@ -1,0 +1,20 @@
+.title {
+    font-weight: bold;
+}
+
+.main_content {
+    padding: 50px;
+
+}
+nav {
+    background-color: black;
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    
+}
+
+nav > a {
+    color: purple;
+    margin-right: 10px;
+}

@@ -36,6 +36,16 @@ def account():
 def register():
     return render_template('register.html')
 
+# Course Page
+@app.route("/course")
+def course():
+    return render_template('course.html')
+
+# Complaints Page
+@app.route("/complaint")
+def complaint():
+    return render_template('complaint.html')
+
 
 
 
