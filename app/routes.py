@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, url_for, redirect
 from app.forms import LoginForm
 from app.functions.package import userInfo
+from app.models import User
 
 
 ''' All Handlers go here. For example: 
@@ -16,7 +17,13 @@ from app.functions.package import userInfo
 @app.route('/')
 @app.route("/index")
 def index():
-    return render_template('index.html')
+    dummy_user = User()
+    dummy_user.username ='susan'
+    dummy_user.email='susan@example.com'
+    dummy_user.posts = ["Hi, my first post", "2nd post :)", "This is my third time here"]
+
+    return render_template('index.html', user=dummy_user.username,
+                           posts=dummy_user.posts)
 
 
 # Login Page
