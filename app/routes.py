@@ -17,8 +17,7 @@ from app.models import User
 @app.route('/')
 @app.route("/index")
 def index():
-    dummy_user = User()
-    dummy_user.username ='susan'
+    dummy_user = User('susan', 'foobar')
     dummy_user.email='susan@example.com'
     dummy_user.posts = ["Hi, my first post", "2nd post :)", "This is my third time here"]
 
@@ -27,7 +26,7 @@ def index():
 
 
 # Login Page
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     return render_template('login.html', title='Sign In', form=form)
