@@ -27,18 +27,41 @@
 <body>
 
     <!-- nav bar for hyper links  -->
-<nav>
-    <a href="{{ url_for('index') }}" >Home</a>
-    {% if current_user.is_anonymous %}
-    <a href="{{ url_for('login') }}" >Login</a>
-    {% else %}
-    <a href="{{ url_for('logout') }}" >Logout</a>
-    {% endif %}
-    <a href="{{ url_for('account') }}" >Account</a>
-    <a href="{{ url_for('course') }}" >Course</a>
-    <a href="{{ url_for('complaint') }}" >Complaint</a>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse navbar-expand-md">
+        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="/static/img/tenor.png"/></a>
+    
+        <button class="navbar-toggler navbar-toggle" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="navbar-toggler-icon">
+                <div class="nav-expand-line"></div>
+                <div class="nav-expand-line"></div>
+                <div class="nav-expand-line"></div>
+            </div>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('course') }}" >Course</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('complaint') }}" >Complaint</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('account') }}" >Account</a></li>
+                
+                {% if current_user.is_anonymous %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}" id="last_nav_link">Login</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}" id="last_nav_link">Logout</a></li>
+                {% endif %}
 
+
+            </ul>
+        </div>
+
+
+
+    
 </nav>
+
+
 <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -50,9 +73,15 @@
     {% endif %}
     {% endwith %}
 
+
+
+
 <div class="main_content">
     {% block main_content%}{% endblock%}
 </div>
+
+
+
 
 <!-- javascript bootstrap -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
