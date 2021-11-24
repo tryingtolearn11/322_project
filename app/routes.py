@@ -1,8 +1,9 @@
 from app import app 
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, flash
 from app.forms import LoginForm
 from app.functions.package import userInfo
-from app.models import User
+from app.models import User, dummy_users_table
+from flask_login import current_user, login_user
 
 
 ''' All Handlers go here. For example: 
@@ -17,18 +18,26 @@ from app.models import User
 @app.route('/')
 @app.route("/index")
 def index():
-    dummy_user = User('susan', 'foobar')
-    dummy_user.email='susan@example.com'
-    dummy_user.posts = ["Hi, my first post", "2nd post :)", "This is my third time here"]
-
-    return render_template('index.html', user=dummy_user.username,
-                           posts=dummy_user.posts)
+    return render_template('index.html')
 
 
 # Login Page
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+#    if current_user.is_authenticated:
+#        return redirect(url_for('index'))
+
     form = LoginForm()
+    if form.validate_on_submit():
+        user = User(form.username.data, form.password.data)
+        if user in dummy_users_table and user.check_password(form.password.data):
+            flash('Valid Login')
+            login_user(user, remember=form.remember_me.data)
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid Username or Password')
+            return redirect(url_for('login'))
+
     return render_template('login.html', title='Sign In', form=form)
 
 # User Info Page

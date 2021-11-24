@@ -7,11 +7,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(UserMixin):
 
-    def __init__(self, username, email):
+    def __init__(self, username, password):
         self.username = username
-        self.email = email
-        self.password_hash = None
+        self.email = ""
+        self.password_hash = generate_password_hash(password)
         self.posts = []
+
+    def set_email(self, email):
+        self.email = email
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -21,14 +24,33 @@ class User(UserMixin):
 
 
     def __repr__(self):
-        return '<User {}, Email {}>'.format(self.username, self.email)
+        return '<User {}, Password {}>'.format(self.username,
+                                               self.password_hash)
+
+    @classmethod
+    def get(cls, username):
+        for user in dummy_users_table:
+            if username == user.username:
+                return user
+        print("User Not Found in DB")
+        return None
 
     
     @property
     def id(self):
         return self.username
 
+
+
 @login.user_loader
 def load_user(user):
     return User.get(user)
-    
+
+
+
+
+# Dummy Data
+dummy_users_table = [
+    User("susan", 'cat'),
+    User("john", 'dog'),
+    User("tom",'fish')]

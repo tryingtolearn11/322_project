@@ -35,7 +35,16 @@
     <a href="{{ url_for('complaint') }}" >Complaint</a>
 
 </nav>
-
+<hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
 
 <div class="main_content">
     {% block main_content%}{% endblock%}

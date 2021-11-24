@@ -9,8 +9,8 @@
         This is our index page
     </div>
     <body>
-        <h1> Hi, {{ user }} </h1>
-        {% for post in posts %}
+        <h1> Hi, {{ current_user.username }} </h1>
+        {% for post in current_user.posts %}
         <div><p> {{ post }}</p></div>
         {% endfor %}
     </body>
