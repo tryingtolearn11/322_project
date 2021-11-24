@@ -3,7 +3,7 @@ from flask import render_template, url_for, redirect, flash
 from app.forms import LoginForm
 from app.functions.package import userInfo
 from app.models import User, dummy_users_table
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 
 
 ''' All Handlers go here. For example: 
@@ -39,6 +39,15 @@ def login():
             return redirect(url_for('login'))
 
     return render_template('login.html', title='Sign In', form=form)
+
+
+
+# Logout Page
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 
 # User Info Page
 @app.route("/account")
