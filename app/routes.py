@@ -3,7 +3,8 @@ from flask import render_template, url_for, redirect, flash, request
 from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
 from app.models import User, registered_users_table
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
+from werkzeug.urls import url_parse
 
 
 
@@ -49,6 +50,12 @@ def login():
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
 
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+
     return render_template('login.html', title='Sign In', form=form)
 
 
@@ -81,6 +88,7 @@ def register():
 
 # User Info Page
 @app.route("/account")
+@login_required
 def account():
     userPackage = userInfo()
     return render_template('account.html', packages=userPackage)
@@ -93,6 +101,7 @@ def course():
 
 # Complaints Page
 @app.route("/complaint", methods=['GET', 'POST'])
+@login_required
 def complaint():
     Comp = ComplaintForm()
     if request.method == 'POST':
