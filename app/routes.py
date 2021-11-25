@@ -61,7 +61,8 @@ def register():
         if user in registered_users_table:
             flash('Already Registered User. Please Login')
         else:
-            flash('Congradulations, you are now registered')
+            flash('Congratulations, you are now registered')
+            registered_users_table.append(user)
 
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form) 
