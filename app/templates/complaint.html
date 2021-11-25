@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% block main_content %}
 
-    <h1> COMPLAINT PAGE :D </h1>
 
-    <h2> This will be the complaint page </h2>
+    <link rel="stylesheet" href="/static/css/complaint.css">
 
-    <div>
-        This is our complaint page
-    </div>
+    <h2>Complaints</h2>
+    <form action="{{ url_for('complaint') }}" method=post>
+    {{ form.hidden_tag() }}
 
+    {{ form.name.label }}
+    {{ form.name }}
+
+    {{ form.subject.label }}
+    {{ form.subject }}
+
+    {{ form.complaint.label }}
+    {{ form.complaint }}
+
+    {{ form.send }}
+    </form>
+
+    
 {% endblock %}

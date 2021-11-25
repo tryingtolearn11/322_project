@@ -1,9 +1,10 @@
 from app import app 
-from flask import render_template, url_for, redirect, flash
+from flask import render_template, url_for, redirect, flash, request
 from app.forms import LoginForm
 from app.functions.package import userInfo
 from app.models import User, dummy_users_table
 from flask_login import current_user, login_user, logout_user
+from app.forms import ComplaintForm
 
 
 ''' All Handlers go here. For example: 
@@ -60,10 +61,17 @@ def account():
 def course():
     return render_template('course.html')
 
+
 # Complaints Page
-@app.route("/complaint")
+@app.route("/complaint", methods=['GET', 'POST'])
 def complaint():
-    return render_template('complaint.html')
+    Comp = ComplaintForm()
+    if request.method == 'POST':
+        return 'Form posted.'
+    
+    elif request.method == 'GET':
+        return render_template('complaint.html', form= Comp)
+
 
 
 
