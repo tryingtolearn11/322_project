@@ -73,6 +73,8 @@ def complaint():
         return render_template('complaint.html', form= Comp)
 
 
-
-
+# Register Page
+@app.route("/register")
+def register():
+    return render_template('register.html')
 
