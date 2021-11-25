@@ -21,6 +21,11 @@ def index():
     return render_template('index.html')
 
 
+
+
+# TODO: Fix: if we enter any registered username AND
+#            any registered password, the user is logged in
+
 # Login Page
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -30,10 +35,16 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User(form.username.data, form.password.data)
-        if user in registered_users_table and user.check_password(form.password.data):
-            flash('Valid Login')
-            login_user(user, remember=form.remember_me.data)
-            return redirect(url_for('index'))
+        if user in registered_users_table:
+            # if user found, return the index
+            user_index = registered_users_table.index(user)
+            # Test for the right password
+            if registered_users_table[user_index].check_password(form.password.data):
+                flash('Valid Login')
+                login_user(user, remember=form.remember_me.data)
+                return redirect(url_for('index'))
+            else:
+                flash('Invalid Username or Password')
         else:
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
