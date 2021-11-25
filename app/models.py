@@ -29,7 +29,7 @@ class User(UserMixin):
 
     @classmethod
     def get(cls, username):
-        for user in dummy_users_table:
+        for user in registered_users_table:
             if username == user.username:
                 return user
         print("User Not Found in DB")
@@ -50,7 +50,7 @@ def load_user(user):
 
 
 # Dummy Data
-dummy_users_table = [
+registered_users_table = [
     User("susan", 'cat'),
     User("john", 'dog'),
     User("tom",'fish')]

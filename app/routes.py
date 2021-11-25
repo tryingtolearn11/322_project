@@ -1,10 +1,10 @@
 from app import app 
 from flask import render_template, url_for, redirect, flash, request
-from app.forms import LoginForm
+from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
-from app.models import User, dummy_users_table
+from app.models import User, registered_users_table
 from flask_login import current_user, login_user, logout_user
-from app.forms import ComplaintForm
+
 
 
 ''' All Handlers go here. For example: 
@@ -13,7 +13,6 @@ from app.forms import ComplaintForm
     
 *** Keep ONLY those types of functions in here
 '''
-
 
 # Home Page 
 @app.route('/')
@@ -31,7 +30,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User(form.username.data, form.password.data)
-        if user in dummy_users_table and user.check_password(form.password.data):
+        if user in registered_users_table and user.check_password(form.password.data):
             flash('Valid Login')
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for('index'))
@@ -48,6 +47,24 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+# Register Page
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(form.username.data, form.password.data)
+        user.set_email(form.email.data)
+
+        # If user is already registered
+        if user in registered_users_table:
+            flash('Already Registered User. Please Login')
+        else:
+            flash('Congradulations, you are now registered')
+
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form) 
 
 
 # User Info Page
@@ -71,10 +88,4 @@ def complaint():
     
     elif request.method == 'GET':
         return render_template('complaint.html', form= Comp)
-
-
-# Register Page
-@app.route("/register")
-def register():
-    return render_template('register.html')
 
