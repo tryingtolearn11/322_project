@@ -6,7 +6,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(UserMixin):
-
     def __init__(self, username, password):
         self.username = username
         self.email = ""
