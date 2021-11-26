@@ -91,12 +91,12 @@ def register():
 @login_required
 def account():
     userPackage = userInfo()
-    return render_template('account.html', packages=userPackage)
+    return render_template('account.html', title='User Info', packages=userPackage)
 
 # Course Page
 @app.route("/course")
 def course():
-    return render_template('course.html')
+    return render_template('course.html', title='Course Page')
 
 
 # Complaints Page
@@ -108,5 +108,5 @@ def complaint():
         return 'Form posted.'
     
     elif request.method == 'GET':
-        return render_template('complaint.html', form= Comp)
+        return render_template('complaint.html', title='Complaints', form= Comp)
 
