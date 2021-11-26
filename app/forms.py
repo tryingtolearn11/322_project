@@ -20,9 +20,9 @@ class RegistrationForm(FlaskForm):
 
 
 class ComplaintForm(FlaskForm):
-    name = TextField("Name")
-    subject = TextField("Subject")
-    complaint = TextAreaField("Complaint")
+    name = StringField('Name', validators=[DataRequired()])
+    subject = StringField('Subject', validators=[DataRequired()])
+    complaint = TextAreaField('Complaint', validators=[DataRequired()])
     send = SubmitField("Submit")
     
 

@@ -39,6 +39,23 @@ class User(UserMixin):
     def id(self):
         return self.username
 
+    
+    class Complaint():
+        def __init__(self, name, subject):
+            self.name = name
+            self.subject = subject
+            self.content = None
+
+        def set_complaint(self, content):
+            self.content = content
+
+
+        def __repr__(self):
+            return '<Name {}\n, Subject {}\n, Content {}\n>'.format(self.name,
+                                                                    self.subject,
+                                                                    self.content)
+
+
 
 
 @login.user_loader
@@ -53,3 +70,12 @@ registered_users_table = [
     User("susan", 'cat'),
     User("john", 'dog'),
     User("tom",'fish')]
+
+registered_users_complaints = [
+    User('susan', 'cat').Complaint('susan', '332')
+]
+
+
+
+
+

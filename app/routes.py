@@ -1,8 +1,8 @@
 from app import app 
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, session
 from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
-from app.models import User, registered_users_table
+from app.models import User, registered_users_table, registered_users_complaints
 from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -46,6 +46,11 @@ def login():
                 flash(form.password.data)
                 flash('Valid Login')
                 login_user(user, remember=form.remember_me.data)
+
+                session['username'] = request.form['username']
+                session['user_index'] = user_index
+                flash(session['username'])
+
                 return redirect(url_for('index'))
             else:
                 flash('Invalid Username or Password')
@@ -69,6 +74,8 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
+    session.pop('username', None)
+    session.pop('user_index', None)
     return redirect(url_for('index'))
 
 
@@ -108,10 +115,16 @@ def course():
 @app.route("/complaint", methods=['GET', 'POST'])
 @login_required
 def complaint():
-    Comp = ComplaintForm()
-    if request.method == 'POST':
-        return 'Form posted.'
-    
-    elif request.method == 'GET':
-        return render_template('complaint.html', title='Complaints', form= Comp)
+    form = ComplaintForm()
+    if form.validate_on_submit():
+        user_index = session['user_index']
+        flash(user_index)
+        new_complaint = registered_users_table[user_index].Complaint(form.name.data,
+                                                                     form.subject.data)
+        new_complaint.set_complaint(form.complaint.data)
+        registered_users_complaints.append(new_complaint)
+        flash('Your Complaint has been submitted for review')
+        print('Recent Complaint: {}\n'.format(new_complaint.content))
+        return redirect(url_for('index'))
+    return render_template('complaint.html', title='Complaints', form=form)
 
