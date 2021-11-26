@@ -1,18 +1,77 @@
 {% extends "base.html" %}
 {% block main_content %}
 
-    <h1> INDEX PAGE </h1>
-    <hr/>
-    <h2> This will be the home page </h2>
-
-    <div>
-        This is our index page
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h4 card-title text-success"> Highest Rated Classes </div>
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <th>Class</th>
+                            <th>Professor</th>
+                            <th>Rating</th>
+                        </thead>
+                        <tbody>
+                            {% for class in high_class_data %}
+                            <tr>
+                                <td>{{ class.class_name }}</td>
+                                <td>{{ class.name }}</td>
+                                <td>{{ class.avg_rating }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h4 card-title text-danger"> Lowest Rated Classes </div>
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <th>Class</th>
+                            <th>Professor</th>
+                            <th>Rating</th>
+                        </thead>
+                        <tbody>
+                            {% for class in low_class_data %}
+                            <tr>
+                                <td>{{ class.class_name }}</td>
+                                <td>{{ class.name }}</td>
+                                <td>{{ class.avg_rating }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h4 card-title text-primary">Top 5 Student With Highest GPA</div>
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Grade</th>
+                        </thead>
+                        <tbody>
+                            {% for stud in student_grade %}
+                            <tr>
+                                <td>{{ stud.name }}</td>
+                                <td>{{ stud.classname }}</td>
+                                <td>{{ stud.gpa }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <body>
-        <h1> Hi {{ current_user.username }} </h1>
-        {% for post in current_user.posts %}
-        <div><p> {{ post }}</p></div>
-        {% endfor %}
-    </body>
+
 
 {% endblock %}

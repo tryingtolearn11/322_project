@@ -3,6 +3,7 @@ from flask import render_template, url_for, redirect, flash, request
 from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
 from app.models import User, registered_users_table
+from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
@@ -19,7 +20,11 @@ from werkzeug.urls import url_parse
 @app.route('/')
 @app.route("/index")
 def index():
-    return render_template('index.html')
+    database=DB()
+    high_class_data = database.getTopRatedClass()
+    low_class_data = database.getLowRatedClass()
+    student_grade = database.getTopStudents()
+    return render_template('index.html',high_class_data=high_class_data,low_class_data=low_class_data,student_grade=student_grade)
 
 
 
