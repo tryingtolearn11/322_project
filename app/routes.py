@@ -43,13 +43,13 @@ def login():
             user_index = registered_users_table.index(user)
             # Test for the right password
             if registered_users_table[user_index].check_password(form.password.data):
-                flash(form.password.data)
+                # flash(form.password.data)
                 flash('Valid Login')
                 login_user(user, remember=form.remember_me.data)
 
                 session['username'] = request.form['username']
                 session['user_index'] = user_index
-                flash(session['username'])
+                # flash(session['username'])
 
                 return redirect(url_for('index'))
             else:
@@ -118,7 +118,7 @@ def complaint():
     form = ComplaintForm()
     if form.validate_on_submit():
         user_index = session['user_index']
-        flash(user_index)
+#        flash(user_index)
         new_complaint = registered_users_table[user_index].Complaint(form.name.data,
                                                                      form.subject.data)
         new_complaint.set_complaint(form.complaint.data)
