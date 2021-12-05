@@ -1,16 +1,16 @@
 {
     "class":[
-        {"id":1,"class_name":"class a","professor_id":4,"avg_rating":"4.5"},
-        {"id":2,"class_name":"class b","professor_id":5,"avg_rating":"3"},
-        {"id":3,"class_name":"class c","professor_id":4,"avg_rating":"3.5"},
-        {"id":4,"class_name":"class d","professor_id":4,"avg_rating":"5"},
-        {"id":5,"class_name":"class e","professor_id":5,"avg_rating":"3.5"},
-        {"id":6,"class_name":"class f","professor_id":8,"avg_rating":"2"},
-        {"id":7,"class_name":"class g","professor_id":8,"avg_rating":"1"},
-        {"id":8,"class_name":"class h","professor_id":4,"avg_rating":"1"},
-        {"id":9,"class_name":"class i","professor_id":5,"avg_rating":"1.5"},
-        {"id":10,"class_name":"class j","professor_id":4,"avg_rating":"2"},
-        {"id":11,"class_name":"class x","professor_id":10,"avg_rating":"2.5"}
+        {"id":1,"class_name":"class a","professor_id":4,"avg_rating":"4.5", "time":"9:00 am - 10:15 am", "room": "NAC 1/103", "status": "Open"},
+        {"id":2,"class_name":"class b","professor_id":5,"avg_rating":"3", "time":"10:00 am - 11:15 am", "room": "NAC 2/203", "status": "Closed"},
+        {"id":3,"class_name":"class c","professor_id":4,"avg_rating":"3.5", "time":"11:00 am - 12:15 pm", "room": "NAC 2/204", "status": "Open"},
+        {"id":4,"class_name":"class d","professor_id":4,"avg_rating":"5", "time":"9:00 am - 11:15 am", "room": "NAC 1/115", "status": "Open"},
+        {"id":5,"class_name":"class e","professor_id":5,"avg_rating":"3.5", "time":"12:00 pm - 2:15 pm", "room": "ONLINE", "status": "Open"},
+        {"id":6,"class_name":"class f","professor_id":8,"avg_rating":"2", "time":"1:00 pm - 3:15 pm", "room": "ONLINE", "status": "Open"},
+        {"id":7,"class_name":"class g","professor_id":8,"avg_rating":"1", "time":"8:00 am - 10:15 am", "room": "NAC 5/523", "status": "Closed"},
+        {"id":8,"class_name":"class h","professor_id":4,"avg_rating":"1", "time":"11:00 am - 2:15 pm", "room": "NAC 1/103", "status": "Open"},
+        {"id":9,"class_name":"class i","professor_id":5,"avg_rating":"1.5", "time":"3:00 pm - 5:15 pm", "room": "NAC 1/103", "status": "Closed"},
+        {"id":10,"class_name":"class j","professor_id":4,"avg_rating":"2", "time":"3:00 pm - 5:15 pm", "room": "NAC 4/403", "status": "Open"},
+        {"id":11,"class_name":"class x","professor_id":10,"avg_rating":"2.5", "time":"12:00 pm - 3:15 pm", "room": "NAC 5/502", "status": "Closed"}
     ],
     "student_grade":[
         {"id":1,"class_id":1,"user_id":1,"rating":5,"comment":"comment goes here","gpa":3},
