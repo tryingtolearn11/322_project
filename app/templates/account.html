@@ -1,33 +1,34 @@
 {% extends "base.html" %}
 {% block main_content %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Information</title>
+</head>
+
+
+
+
 <body>
-<h1>Info tab</h1>
-<form action="" method="post"></form>
+    <div class="account_container">
+        <h1>Account Information</h1>
+        <div class="row">
+            <div class="col-md-2">
+                <ul>
+                    <li class="account-item"><a class="account-link" href="#">Personal Record</a></li>
+                    <li class="account-item"><a class="account-link" href="#">Apply For Graduation</a></li>
+                    <li class="account-item"><a class="account-link" href="#">Tutorial</a></li>
+                    <li class="account-item"><a class="account-link" href="#">All Academic Records</a></li>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6"></div>
-
-        <h2>Account Information</h2>
-        
-        {% for p in packages%} 
-        <div class="user">
-            <div class="title">
-                <a href="#"> {{p.name}} {{p.description}}</a>
-                <div class="desc"> Filler </div>
-
+                </ul>
             </div>
         </div>
-        {% endfor %}
-
-        <div class="col-md-3"></div>
     </div>
-</div>
 
-
+    
 </body>
-
 </html>
 {% endblock %}

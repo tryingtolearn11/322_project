@@ -4,21 +4,28 @@
 
     <link rel="stylesheet" href="/static/css/complaint.css">
 
-    <h2>Complaints</h2>
-    <form action="{{ url_for('complaint') }}" method=post>
-    {{ form.hidden_tag() }}
+    <div class="complaint">
+        <h2>Complaints</h2>
+        <div class="col-md-4">
+            <form action="{{ url_for('complaint') }}" method=post>
+                {{ form.hidden_tag() }}
+            
+                {{ form.name.label }}
+                {{ form.name }}
+            
+                {{ form.subject.label }}
+                {{ form.subject }}
+            
+                {{ form.complaint.label }}
+                {{ form.complaint }}
+            
+                {{ form.send }}
+                </form>
 
-    {{ form.name.label }}
-    {{ form.name }}
 
-    {{ form.subject.label }}
-    {{ form.subject }}
+        </div>
 
-    {{ form.complaint.label }}
-    {{ form.complaint }}
-
-    {{ form.send }}
-    </form>
+    </div>
 
     
 {% endblock %}
