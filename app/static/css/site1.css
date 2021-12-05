@@ -1,0 +1,76 @@
+.title {
+    font-weight: bold;
+}
+
+.main_content {
+    padding: 50px;
+
+}
+
+/*outer nav */
+.navbar-inverse {
+    background-color: #000000;
+}
+
+
+
+/* nav bar text color*/
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a {
+    color: pink;
+    
+}
+
+/* expand toggle color*/
+.navbar-inverse .navbar-toggle {
+    border-color: white;
+}
+
+/* nav bar bottom*/
+.navbar {
+    margin-bottom: 0px;
+}
+
+/* home page img*/
+.navbar-brand img {
+    width: 100px;
+    margin-left: 00px;
+}
+
+/* expand toggle gap*/
+.navbar-inverse .navbar-toggle {
+    margin-top: 0px;
+}
+
+/* top nav gap*/
+.navbar-nav li {
+    margin-top: 0px;
+}
+
+/* how far away text from right*/
+#last_nav_link {
+    margin-right: 0px;
+}
+
+/* nav bar */
+nav {
+    padding: 10px;
+    font-size: 17px;
+    height: 85px;
+}
+
+
+
+
+/* triple lines within expand box*/
+.nav-expand-line {
+    height: 2px;
+    margin: 6px;
+    background-color: rgb(255, 255, 255);
+}
+
+/* nav drop down menu*/
+#navbarSupportedContent {
+    background-color: #000000;
+    padding: 10px;
+}
