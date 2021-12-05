@@ -2,9 +2,10 @@ from app import app
 from flask import render_template, url_for, redirect, flash, request, session
 from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
-from app.models import User, registered_users_table, registered_users_complaints
+from app.models import User, registered_users_table, registered_users_complaints, ACCESS
 from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
+from functools import wraps
 from werkzeug.urls import url_parse
 
 
@@ -15,6 +16,56 @@ from werkzeug.urls import url_parse
     
 *** Keep ONLY those types of functions in here
 '''
+
+def requires_access_level(access_level):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if not session.get('username'):
+                flash(session.get('username'))
+                return redirect(url_for('login'))
+
+            user = User.get(session.get('username'))
+            if session['username'] == "susan":
+                user.set_registrar()
+
+            flash(user.access)
+            flash(current_user)
+            if not user.allowed(session['access']):
+                return redirect(url_for('account', message="Restricted"))
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
+@app.route('/class-setup')
+@login_required
+@requires_access_level(ACCESS['registrar'])
+def class_setup():
+    return render_template('class_setup.html', title='Class Setup')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Home Page 
 @app.route('/')
@@ -49,7 +100,13 @@ def login():
 
                 session['username'] = request.form['username']
                 session['user_index'] = user_index
-                # flash(session['username'])
+                session['email'] = user.email
+
+                if session['username'] == "susan":
+                    user.set_registrar()
+                flash(user.access)
+
+                session['access'] = user.access
 
                 return redirect(url_for('index'))
             else:

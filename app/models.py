@@ -3,14 +3,31 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-
+ACCESS = {
+    'visitor' : 0,
+    'student' : 1,
+    'instructor' : 2,
+    'registrar' : 3
+}
 
 class User(UserMixin):
-    def __init__(self, username, password):
+    def __init__(self, username, password, access=ACCESS['student']):
         self.username = username
         self.email = ""
         self.password_hash = generate_password_hash(password)
         self.posts = []
+        self.access = access
+
+
+    def allowed(self, access_level):
+        return self.access >= access_level
+
+    def is_registrar(self):
+        return (self.access == ACCESS['registrar'])
+
+    def set_registrar(self):
+        self.access = ACCESS['registrar']
+
 
     def set_email(self, email):
         self.email = email
@@ -66,6 +83,7 @@ def load_user(user):
 
 
 # Dummy Data
+
 registered_users_table = [
     User("susan", 'cat'),
     User("john", 'dog'),
@@ -74,6 +92,7 @@ registered_users_table = [
 registered_users_complaints = [
     User('susan', 'cat').Complaint('susan', '332')
 ]
+
 
 
 

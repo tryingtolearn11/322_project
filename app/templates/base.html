@@ -50,6 +50,9 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}" id="last_nav_link">Login</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}" id="last_nav_link">Logout</a></li>
+                {% if  current_user and  current_user.access == 3 %}
+                    <a href="{{ url_for('class_setup') }}">Class-Setup</a>
+                    {% endif %}
                 {% endif %}
 
 
@@ -60,6 +63,9 @@
 
     
 </nav>
+
+
+
 
 
 <hr>
