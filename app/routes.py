@@ -17,6 +17,18 @@ from werkzeug.urls import url_parse
 *** Keep ONLY those types of functions in here
 '''
 
+
+
+
+# --------------- Periods ----------------------------------------
+
+# Class Set-up Period
+# Course Registration Period
+# Class running period
+# Grading Period
+
+
+
 def requires_access_level(access_level):
     def decorator(f):
         @wraps(f)
@@ -46,26 +58,32 @@ def class_setup():
 
 
 
+@app.route('/course-registration')
+@login_required
+@requires_access_level(ACCESS['registrar'])
+def course_registration():
+    return render_template('course_registration.html', title='Course Registration')
+
+
+@app.route('/grading')
+@login_required
+@requires_access_level(ACCESS['registrar'])
+def grading_period():
+    return render_template('grading.html', title='Grading')
 
 
 
 
 
+# Instructor Classes
 
+@app.route('/your-classes')
+@login_required
+@requires_access_level(ACCESS['instructor'])
+def instructor_classes():
+    return render_template('instructor_classes.html', title='Classes')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# --------------------------------------------------------------------
 
 # Home Page 
 @app.route('/')
@@ -78,10 +96,6 @@ def index():
     return render_template('index.html',high_class_data=high_class_data,low_class_data=low_class_data,student_grade=student_grade)
 
 
-
-
-# TODO: Fix: if we enter any registered username AND
-#            any registered password, the user is logged in
 
 # Login Page
 @app.route("/login", methods=['GET', 'POST'])
