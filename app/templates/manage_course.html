@@ -9,7 +9,8 @@
         <li class="nav-item"><a class="nav-link" href="{{ url_for('class_setup') }}"id="last_nav_link">Class-Setup</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('course_registration') }}"id="last_nav_link">Course Registration</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('grading_period')}}"id="last_nav_link">Grading</a></li>
-        {% elif current_user.access == 2 %}
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
+        {% elif current_user.access >= 2 %}
         <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
         {% endif %}
     </div>
