@@ -17,6 +17,18 @@ from werkzeug.urls import url_parse
 *** Keep ONLY those types of functions in here
 '''
 
+
+
+
+# --------------- Periods ----------------------------------------
+
+# Class Set-up Period
+# Course Registration Period
+# Class running period
+# Grading Period
+
+
+
 def requires_access_level(access_level):
     def decorator(f):
         @wraps(f)
@@ -29,10 +41,13 @@ def requires_access_level(access_level):
             if session['username'] == "susan":
                 user.set_registrar()
 
+            if session['username'] == "john":
+                user.set_instructor()
+
             flash(user.access)
-            flash(current_user)
-            if not user.allowed(session['access']):
-                return redirect(url_for('account', message="Restricted"))
+            if not user.allowed(access_level):
+                flash("Sorry, you are not authorized to view")
+                return redirect(url_for('index', message="restricted access"))
             return f(*args, **kwargs)
         return decorated_function
     return decorator
@@ -46,26 +61,37 @@ def class_setup():
 
 
 
+@app.route('/course-registration')
+@login_required
+@requires_access_level(ACCESS['registrar'])
+def course_registration():
+    return render_template('course_registration.html', title='Course Registration')
+
+
+@app.route('/grading')
+@login_required
+@requires_access_level(ACCESS['registrar'])
+def grading_period():
+    return render_template('grading.html', title='Grading')
+
+
+@app.route('/manage-course')
+@login_required
+@requires_access_level(ACCESS['instructor'])
+def manage_course():
+    return render_template('manage_course.html', title='Manage')
 
 
 
+# Instructor Classes
 
+@app.route('/your-classes')
+@login_required
+@requires_access_level(ACCESS['instructor'])
+def instructor_classes():
+    return render_template('instructor_classes.html', title='Classes')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# --------------------------------------------------------------------
 
 # Home Page 
 @app.route('/')
@@ -78,10 +104,6 @@ def index():
     return render_template('index.html',high_class_data=high_class_data,low_class_data=low_class_data,student_grade=student_grade)
 
 
-
-
-# TODO: Fix: if we enter any registered username AND
-#            any registered password, the user is logged in
 
 # Login Page
 @app.route("/login", methods=['GET', 'POST'])
@@ -101,9 +123,13 @@ def login():
                 session['username'] = request.form['username']
                 session['user_index'] = user_index
                 session['email'] = user.email
-
+    
+                # Dummy Data
                 if session['username'] == "susan":
                     user.set_registrar()
+                if session['username'] == "john":
+                    user.set_instructor()
+
                 flash(user.access)
 
                 session['access'] = user.access
@@ -114,15 +140,7 @@ def login():
         else:
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
-
         login_user(user, remember=form.remember_me.data)
-        '''
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(next_page)
-        ''' 
-
     return render_template('login.html', title='Sign In', form=form)
 
 
@@ -133,6 +151,8 @@ def logout():
     logout_user()
     session.pop('username', None)
     session.pop('user_index', None)
+    session.pop('email', None)
+    session.pop('access', None)
     return redirect(url_for('index'))
 
 
