@@ -41,10 +41,13 @@ def requires_access_level(access_level):
             if session['username'] == "susan":
                 user.set_registrar()
 
+            if session['username'] == "john":
+                user.set_instructor()
+
             flash(user.access)
-            flash(current_user)
-            if not user.allowed(session['access']):
-                return redirect(url_for('account', message="Restricted"))
+            if not user.allowed(access_level):
+                flash("Sorry, you are not authorized to view")
+                return redirect(url_for('index', message="restricted access"))
             return f(*args, **kwargs)
         return decorated_function
     return decorator
@@ -72,6 +75,11 @@ def grading_period():
     return render_template('grading.html', title='Grading')
 
 
+@app.route('/manage-course')
+@login_required
+@requires_access_level(ACCESS['instructor'])
+def manage_course():
+    return render_template('manage_course.html', title='Manage')
 
 
 
@@ -115,9 +123,13 @@ def login():
                 session['username'] = request.form['username']
                 session['user_index'] = user_index
                 session['email'] = user.email
-
+    
+                # Dummy Data
                 if session['username'] == "susan":
                     user.set_registrar()
+                if session['username'] == "john":
+                    user.set_instructor()
+
                 flash(user.access)
 
                 session['access'] = user.access
@@ -128,15 +140,7 @@ def login():
         else:
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
-
         login_user(user, remember=form.remember_me.data)
-        '''
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(next_page)
-        ''' 
-
     return render_template('login.html', title='Sign In', form=form)
 
 
@@ -147,6 +151,8 @@ def logout():
     logout_user()
     session.pop('username', None)
     session.pop('user_index', None)
+    session.pop('email', None)
+    session.pop('access', None)
     return redirect(url_for('index'))
 
 

@@ -53,18 +53,10 @@
                         
                 {% if current_user.is_anonymous %}
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}" id="last_nav_link">Login</a></li>
-                {% else %}
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}" id="last_nav_link">Logout</a></li>
 
-                {% if  current_user and  current_user.access == 3 %}
-                    <a href="{{ url_for('class_setup') }}">Class-Setup</a>
-                    <a href="{{ url_for('course_registration') }}">Course Registration</a>
-                    <a href="{{ url_for('grading_period') }}">Grading</a>
-                    {% endif %}
-
-                    {% if  current_user and (current_user.access >= 2) %}
-                    <a href="{{ url_for('instructor_classes') }}">Your Classes</a>
-                    {% endif %}
+                {% elif current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}" id="last_nav_link">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('manage_course') }}"id="last_nav_link">Manage Course</a></li>
                 {% endif %}
 
                         

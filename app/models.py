@@ -28,6 +28,8 @@ class User(UserMixin):
     def set_registrar(self):
         self.access = ACCESS['registrar']
 
+    def set_instructor(self):
+        self.access = ACCESS['instructor']
 
     def set_email(self, email):
         self.email = email
