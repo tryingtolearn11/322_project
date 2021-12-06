@@ -12,9 +12,6 @@ ACCESS = {
 }
 
 
-
-
-
 class User(UserMixin):
     def __init__(self, username, password, access=ACCESS['student']):
         self.username = username
@@ -97,6 +94,9 @@ class Student(User):
     def addGrade(self, grade, course, courseID, year):
         self.grades[courseID] = [grade, course, year]
 
+    #def addWarnings(self, warningCount, warningSummary):
+        #self.warning = 
+
     
     def __repr__(self):
         return '<Student {}, {}>'.format(self.student_id, self.username)
@@ -111,9 +111,9 @@ def load_user(user):
 # Dummy Data
 
 registered_users_table = [
-    User("susan", 'cat'), 
-    User("john", 'dog'),  
-    User("tom",'fish')]   
+    User("susan", 'cat'), # Registrars
+    User("john", 'dog'), # Instructor
+    User("tom",'fish')] # Student
 
 registered_users_complaints = [
     User('susan', 'cat').Complaint('susan', '332')
