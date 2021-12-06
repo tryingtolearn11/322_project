@@ -89,6 +89,8 @@ class Student(User):
         super(Student, self).__init__(*args, **kwargs)
         self.student_id = User.generate_StudentID(8)
         self.grades = {}
+        self.droppedCourses = {}
+        self.currentClasses = {}
         self.suspended = False
         self.terminated = False
         self.warning = 0
@@ -125,11 +127,8 @@ class Student(User):
             return 1
         elif letterGrade == "D-":
             return 0.7
-        elif letterGrade == "F":
+        else: 
             return 0
-        else:
-            return None
-
         
 
     def calculateGPA(self):
@@ -180,6 +179,16 @@ class Student(User):
             self.suspended = True
             print("Student Will be suspended")
 
+    def addClass(self, courseID, course, credits, year):
+        self.currentClasses[courseID] = ["N/A", course, credits, year]
+
+    def dropClass(self, courseID):
+        try:
+            course_info = self.currentClasses[courseID] 
+            self.currentClasses.pop(courseID)
+            self.droppedCourses[courseID] = ["W", course_info[1], course_info[2], course_info[3]]
+        except KeyError as ex:
+            print("No such Course: '%s'" % ex.message)
 
     
     def __repr__(self):
@@ -213,6 +222,16 @@ def generateDummyStudent():
     s.addGrade("e", "A-", "sw", "3", "2021")
     s.addGrade("f", "A-", "sw", "3", "2021")
     s.addGrade("g", "B", "sw", "3", "2021")
+
+    # Current classes
+    s.addClass("1", "www", "4", "2021")
+    s.addClass("3", "yyy", "3", "2021")
+    s.addClass("4", "xxx", "4", "2021")
+    s.addClass("2", "zzz", "3", "2021")
+    s.addClass("5", "aaa", "4", "2021")
+    
+    s.dropClass("5")
+    s.applyForGraduation()
     return s
 
 
