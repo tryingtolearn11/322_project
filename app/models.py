@@ -147,9 +147,10 @@ class Student(User):
             grade_value += Student.convertLetterToGrade(value[0])
             credit += int(value[2])
             numOfCredits += 1
-            print("Grade value {}, credits {}".format(grade_value, credit))
+            #print("Grade value {}, credits {}".format(grade_value, credit))
         gpa = float(grade_value / numOfCredits)
         self.gpaBySemester.append(gpa)
+        print(gpa)
         return gpa
 
     def evaluateGPA(self):
@@ -241,6 +242,7 @@ Tom.addClass("3", "yyy", "3", "2021")
 Tom.addClass("4", "xxx", "4", "2021")
 Tom.addClass("2", "zzz", "3", "2021")
 Tom.addClass("5", "aaa", "4", "2021")
+Tom.evaluateGPA()
 
 
 
