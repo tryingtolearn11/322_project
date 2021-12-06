@@ -20,6 +20,9 @@
      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
      crossorigin="anonymous">
      <link rel="stylesheet" href="/static/css/site.css">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    integrity="sha384-HzLeBuhoNPVS15KYnjxØBT+WBOQEEQLpro+NBkkk5gbc67FTaL7XIGa2w1LØXbgc" crossorigin="anonymous">
+
 
 
 </head>
@@ -29,7 +32,7 @@
 <body>
     
     <nav class="navbar navbar-toggleable-md navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url_for('index') }}">CUNYZERO</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}"><i class="fas fa-chalkboard"></i>CUNYZERO</a>
 
 
 
@@ -56,8 +59,19 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}" id="last_nav_link">Login</a></li>
 
                 {% elif current_user.is_authenticated %}
+                    <li class="nav-item-dropdown">
+                        <div class="dropdown">
+                            <a href="{{ url_for('manage_course') }}" class="nav-link">Manage Courses</a>
+                            <div class="dropdown-content">
+                                <a href="#">Generic</a>
+                                <a href="#">Test</a>
+                            </div>
+
+                        </div>    
+
+
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}" id="last_nav_link">Logout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('manage_course') }}"id="last_nav_link">Manage Course</a></li>
                 {% endif %}
 
                         
@@ -70,9 +84,6 @@
 
     </main>
 
-    <footer>
-
-    </footer>
 
 
 
@@ -96,6 +107,81 @@
     <div class="main_content">
         {% block main_content%}{% endblock%}
     </div>
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <div class="footer-link-wrapper">
+                    <div class="footer-link-items">
+                        <h2>STUDENTS</h2>
+                        <a href="#">Academic Calendar</a>
+                        <a href="#">Courses - CCNY Bulletin</a>
+                        <a href="#">Courses - CUNY list</a>
+                        <a href="#">Apply Now - Undergraduate</a>
+                        <a href="#">Apply Now - Graduate</a>
+                        <a href="#">Registrar</a>
+                    </div>
+                    <div class="footer-link-items">
+                        <h2>FACULTY & STAFF</h2>
+                        <a href="#">Directory</a>
+                        <a href="#">Diversity & Compliance</a>
+                        <a href="#">Employee Resources</a>
+                        <a href="#">Faculty Resources</a>
+                        <a href="#">Human Resources</a>
+                        <a href="#">Offices and Services</a>
+                    </div>
+                </div>
+                <div class="footer-link-wrapper">
+                    <div class="footer-link-items">
+                        <h2>RESOURCES</h2>
+                        <a href="#">Contact Us</a>
+                        <a href="#">Employer Services</a>
+                        <a href="#">Safety</a>
+                        <a href="#">CCNY and CUNY Policies</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                    <div class="footer-link-items">
+                        <h2>ACCESSIBILITY</h2>
+                        <a href="#">Accessibility Statement</a>
+                        <a href="#">Libraries</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Information Technology</a>
+                        <a href="#">Loaner Devices</a>
+                        <a href="#">Work at CCNY</a>
+                    </div>
+                </div>
+            </div>
+            <div class="social-media">
+                <div class="social-media-wrap">
+                    <div class="footer-logo">
+                        <a href="#" id="footer-logo"><i class="fas fa-chalkboard"></i>CUNYZERO</a>   
+                    </div>
+                    <p class="website-right"> ©CUNYZERO 2021. ALL rights reserved</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icons-link" target= "_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icons-link" target= "_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icons-link" target= "_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icons-link" target= "_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icons-link" target= "_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </footer>
 
 
 
