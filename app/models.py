@@ -132,11 +132,11 @@ class Student(User):
 
         
 
-    def calculateGPA(self, grades):
+    def calculateGPA(self):
         grade_value = 0
         credit = 0
         numOfCredits = 0
-        for key, value in grades.items():
+        for key, value in self.grades.items():
             grade_value += Student.convertLetterToGrade(value[0])
             credit += int(value[2])
             numOfCredits += 1
@@ -146,7 +146,7 @@ class Student(User):
         return gpa
 
     def evaluateGPA(self):
-        semester_gpa = self.calculateGPA(self.grades)
+        semester_gpa = self.calculateGPA()
         overall_gpa = 0
 
         for i in self.gpaBySemester:
@@ -164,7 +164,14 @@ class Student(User):
 
 
 
-
+    def applyForGraduation(self):
+        self.evaluateGPA()
+        if len(self.grades) >= 8 and self.overallGPA >= 2:
+            self.graduationStatus = True
+            print("Student Eligible for Graduation!")
+        else:
+            print("Reckless Graduation application")
+            self.addWarnings(1)
 
 
     def addWarnings(self, warningCount):
@@ -196,6 +203,17 @@ registered_users_complaints = [
     User('susan', 'cat').Complaint('susan', '332')
 ]
 
+
+def generateDummyStudent():
+    s = Student("damien", "singh")
+    s.addGrade("a", "C+", "swe", "3", "2021")
+    s.addGrade("b", "A+", "sw", "4", "2021")
+    s.addGrade("c", "A-", "sw", "4", "2021")
+    s.addGrade("d", "B-", "sw", "4", "2021")
+    s.addGrade("e", "A-", "sw", "3", "2021")
+    s.addGrade("f", "A-", "sw", "3", "2021")
+    s.addGrade("g", "B", "sw", "3", "2021")
+    return s
 
 
 
