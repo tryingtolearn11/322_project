@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block main_content %}
+
+    <h1>COURSE History</h1>
+    <hr/>
+
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>CourseID</th>
+                <th>Course</th>
+                <th>Grade</th>
+                <th>Credits</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tr>
+            {% for course_id, info in past_courses.items() %}
+                <td>{{ course_id }}</td>
+                <td>{{ info[1] }}</td>
+                <td>{{ info[0] }}</td>
+                <td>{{ info[2] }}</td>
+                <td>{{ info[3] }}</td>
+        </tr>
+            {% endfor %}
+    </table>
+</body>
+    
+    
+
+{% endblock %}

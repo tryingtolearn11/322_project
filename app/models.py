@@ -12,6 +12,14 @@ ACCESS = {
 }
 
 
+PERIOD = {
+    'class-setup': 0,
+    'course-registration': 1,
+    'class-running': 2,
+    'grading': 3
+}
+
+
 class User(UserMixin):
     def __init__(self, username, password, access=ACCESS['student']):
         self.username = username
@@ -209,11 +217,33 @@ def load_user(user):
 registered_users_table = [
     User("susan", 'cat'), # Registrars
     User("john", 'dog'), # Instructor
-    User("tom",'fish')] # Student
+    Student("tom",'fish')] # Student
 
 registered_users_complaints = [
     User('susan', 'cat').Complaint('susan', '332')
 ]
+
+
+Tom = User.get("tom")
+
+Tom.addGrade("a", "C+", "swe", "3", "2021")
+Tom.addGrade("b", "A+", "sw", "4", "2021")
+Tom.addGrade("c", "A-", "sw", "4", "2021")
+Tom.addGrade("d", "B-", "sw", "4", "2021")
+Tom.addGrade("e", "A-", "sw", "3", "2021")
+Tom.addGrade("f", "A-", "sw", "3", "2021")
+Tom.addGrade("g", "B", "sw", "3", "2021")
+
+# Current classes
+
+Tom.addClass("1", "www", "4", "2021")
+Tom.addClass("3", "yyy", "3", "2021")
+Tom.addClass("4", "xxx", "4", "2021")
+Tom.addClass("2", "zzz", "3", "2021")
+Tom.addClass("5", "aaa", "4", "2021")
+
+
+
 
 
 def generateDummyStudent():

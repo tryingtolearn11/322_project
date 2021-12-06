@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, url_for, redirect, flash, request, session
 from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
-from app.models import User, registered_users_table, registered_users_complaints, ACCESS
+from app.models import User, Student, registered_users_table, registered_users_complaints, ACCESS, Tom
 from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
 from functools import wraps
@@ -156,7 +156,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-# Register Page
+# Register Page for Student
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -180,7 +180,34 @@ def register():
 @login_required
 def account():
     userPackage = userInfo()
+
     return render_template('account.html', title='User Info', packages=userPackage)
+
+
+# Students Course History
+@app.route("/account/course-history")
+@login_required
+def course_history():
+    if isinstance(current_user, Student):
+        print("User is a student")
+
+        # Show List of Past Courses
+        past_courses = current_user.grades
+        print(current_user.grades)
+
+    else:
+        print("User is not a student")
+
+
+    return render_template('course_history.html', title='Course History',
+                           past_courses=past_courses)
+
+
+
+
+
+
+
 
 # Course Page
 @app.route("/course")
