@@ -107,8 +107,8 @@ class Student(User):
         self.coursesBySemester = []
 
 
-    def addGrade(self, courseID, grade, course, credits, year):
-        self.grades[courseID] = [grade, course, credits, year]
+    def addGrade(self, grade, course):
+        self.grades[course.courseID] = [grade, course.courseName, course.credits, course.year]
 
 
     @staticmethod
@@ -240,9 +240,13 @@ class Course():
         return '<Course {}, {}>'.format(self.courseID, self.courseName)
 
 
-
-
-
+    @classmethod
+    def get(cls, courseID):
+        for course in registered_courses_table:
+            if courseID == course.courseID:
+                return course
+        print("Course Not Found in DB")
+        return None
 
 
 
@@ -263,6 +267,13 @@ registered_users_table = [
     User("john", 'dog'), # Instructor
     Student("tom",'fish')] # Student
 
+registered_courses_table = [
+    Course("1A", "Software", "3", "2021"),
+    Course("2A", "Data Structures", "3", "2021"),
+    Course("3A", "Algorithms", "3", "2021"),
+    Course("4A", "Statistics", "3", "2021"),
+    Course("5A", "Operating System", "4", "2021"),]
+
 registered_users_complaints = [
     User('susan', 'cat').Complaint('susan', '332')
 ]
@@ -270,13 +281,11 @@ registered_users_complaints = [
 
 Tom = User.get("tom")
 
-Tom.addGrade("a", "C+", "swe", "3", "2021")
-Tom.addGrade("b", "A+", "sw", "4", "2021")
-Tom.addGrade("c", "A-", "sw", "4", "2021")
-Tom.addGrade("d", "B-", "sw", "4", "2021")
-Tom.addGrade("e", "A-", "sw", "3", "2021")
-Tom.addGrade("f", "A-", "sw", "3", "2021")
-Tom.addGrade("g", "B", "sw", "3", "2021")
+Tom.addGrade("A", Course.get("1A"))
+Tom.addGrade("B+", Course.get("2A"))
+Tom.addGrade("C-", Course.get("3A"))
+Tom.addGrade("A+", Course.get("4A"))
+Tom.addGrade("A", Course.get("5A"))
 
 # Current classes
 
@@ -293,6 +302,8 @@ Tom.evaluateGPA()
 
 def generateDummyStudent():
     s = Student("damien", "singh")
+
+    '''
     s.addGrade("a", "C+", "swe", "3", "2021")
     s.addGrade("b", "A+", "sw", "4", "2021")
     s.addGrade("c", "A-", "sw", "4", "2021")
@@ -300,6 +311,7 @@ def generateDummyStudent():
     s.addGrade("e", "A-", "sw", "3", "2021")
     s.addGrade("f", "A-", "sw", "3", "2021")
     s.addGrade("g", "B", "sw", "3", "2021")
+    '''
 
     # Current classes
 

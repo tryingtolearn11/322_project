@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, url_for, redirect, flash, request, session
 from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
-from app.models import User, Student, registered_users_table, registered_users_complaints, ACCESS, Tom
+from app.models import User, Student, registered_users_table, registered_users_complaints, ACCESS, Tom, registered_courses_table
 from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
 from functools import wraps
@@ -215,7 +215,8 @@ def course_history():
 # Lists all the courses
 @app.route("/course")
 def course():
-    return render_template('course.html', title='Course Page')
+    courses = registered_courses_table
+    return render_template('course.html', title='Course Page', courses=courses)
 
 
 # Complaints Page
