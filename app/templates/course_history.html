@@ -17,14 +17,18 @@
             </tr>
         </thead>
         <tr>
-            {% for course_id, info in past_courses.items() %}
-                <td>{{ course_id }}</td>
-                <td>{{ info[1] }}</td>
-                <td>{{ info[0] }}</td>
-                <td>{{ info[2] }}</td>
-                <td>{{ info[3] }}</td>
-        </tr>
-            {% endfor %}
+            {% if past_courses == 0 %}
+                <h3>No History Available</h3>
+            {% else %}
+                {% for course_id, info in past_courses.items() %}
+                    <td>{{ course_id }}</td>
+                    <td>{{ info[1] }}</td>
+                    <td>{{ info[0] }}</td>
+                    <td>{{ info[2] }}</td>
+                    <td>{{ info[3] }}</td>
+            </tr>
+                {% endfor %}
+            {% endif %}
     </table>
 </body>
     

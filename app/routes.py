@@ -195,8 +195,10 @@ def course_history():
         past_courses = current_user.grades
         print(current_user.grades)
 
+
     else:
         print("User is not a student")
+        past_courses = 0
 
 
     return render_template('course_history.html', title='Course History',
