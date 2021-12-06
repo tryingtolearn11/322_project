@@ -187,6 +187,9 @@ class Student(User):
             course_info = self.currentClasses[courseID] 
             self.currentClasses.pop(courseID)
             self.droppedCourses[courseID] = ["W", course_info[1], course_info[2], course_info[3]]
+            if len(self.currentClasses) == 0:
+                self.addWarnings(3)
+
         except KeyError as ex:
             print("No such Course: '%s'" % ex.message)
 
@@ -224,6 +227,7 @@ def generateDummyStudent():
     s.addGrade("g", "B", "sw", "3", "2021")
 
     # Current classes
+
     s.addClass("1", "www", "4", "2021")
     s.addClass("3", "yyy", "3", "2021")
     s.addClass("4", "xxx", "4", "2021")
