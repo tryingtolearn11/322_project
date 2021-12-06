@@ -111,9 +111,9 @@ def load_user(user):
 # Dummy Data
 
 registered_users_table = [
-    User("susan", 'cat'),
-    User("john", 'dog'),
-    User("tom",'fish')]
+    User("susan", 'cat'), 
+    User("john", 'dog'),  
+    User("tom",'fish')]   
 
 registered_users_complaints = [
     User('susan', 'cat').Complaint('susan', '332')
