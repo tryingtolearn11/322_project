@@ -212,6 +212,7 @@ def course_history():
 
 
 # Course Page
+# Lists all the courses
 @app.route("/course")
 def course():
     return render_template('course.html', title='Course Page')

@@ -212,9 +212,52 @@ def load_user(user):
     return User.get(user)
 
 
+class Course():
+    def __init__(self, courseID, courseName, credits, year):
+        self.courseID = courseID
+        self.courseName = courseName
+        self.credits = credits
+        self.year = year
+        self.instructor = None
+        self.roster = []
+        self.cancelled = False
+
+    # def assignInstructor(self, instructor):
+
+    # quick hack version of addStudent
+    def addStudent(self, student):
+        self.roster.append(student)
+
+    def removeStudent(self, student):
+        self.roster.pop(student)
+
+    def checkCourseStatus(self):
+        if len(self.roster) < 5:
+            self.cancelled = True
+
+
+    def __repr__(self):
+        return '<Course {}, {}>'.format(self.courseID, self.courseName)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Dummy Data
-
 registered_users_table = [
     User("susan", 'cat'), # Registrars
     User("john", 'dog'), # Instructor
