@@ -89,13 +89,90 @@ class Student(User):
         super(Student, self).__init__(*args, **kwargs)
         self.student_id = User.generate_StudentID(8)
         self.grades = {}
+        self.suspended = False
+        self.terminated = False
+        self.warning = 0
+        self.overallGPA = 0
+        self.gpaBySemester = []
+        self.coursesBySemester = []
 
 
-    def addGrade(self, grade, course, courseID, year):
-        self.grades[courseID] = [grade, course, year]
+    def addGrade(self, courseID, grade, course, credits, year):
+        self.grades[courseID] = [grade, course, credits, year]
 
-    #def addWarnings(self, warningCount, warningSummary):
-        #self.warning = 
+
+    @staticmethod
+    def convertLetterToGrade(letterGrade):
+        if letterGrade == "A+" or letterGrade == "A":
+            return 4
+        elif letterGrade == "A-":
+            return 3.7
+        elif letterGrade == "B+":
+            return 3.3
+        elif letterGrade == "B":
+            return 3
+        elif letterGrade == "B-":
+            return 2.7
+        elif letterGrade == "C+":
+            return 2.3
+        elif letterGrade == "C":
+            return 2
+        elif letterGrade == "C-":
+            return 1.7
+        elif letterGrade == "D+":
+            return 1.3
+        elif letterGrade == "D":
+            return 1
+        elif letterGrade == "D-":
+            return 0.7
+        elif letterGrade == "F":
+            return 0
+        else:
+            return None
+
+        
+
+    def calculateGPA(self, grades):
+        grade_value = 0
+        credit = 0
+        numOfCredits = 0
+        for key, value in grades.items():
+            grade_value += Student.convertLetterToGrade(value[0])
+            credit += int(value[2])
+            numOfCredits += 1
+            print("Grade value {}, credits {}".format(grade_value, credit))
+        gpa = float(grade_value / numOfCredits)
+        self.gpaBySemester.append(gpa)
+        return gpa
+
+    def evaluateGPA(self):
+        semester_gpa = self.calculateGPA(self.grades)
+        overall_gpa = 0
+
+        for i in self.gpaBySemester:
+            overall_gpa += i
+        self.overallGPA = overall_gpa / len(self.gpaBySemester)
+
+        if semester_gpa >= 2 and semester_gpa <= 2.25:
+            self.addWarnings(1)
+
+        if semester_gpa >= 3.75 or self.overallGPA > 3.5:
+            self.honorRoll = True
+            # Can remove 1 warning if any
+            if self.warning > 0:
+                self.warning -= 1
+
+
+
+
+
+
+    def addWarnings(self, warningCount):
+        self.warning += warningCount
+        if self.warning >= 3:
+            self.suspended = True
+            print("Student Will be suspended")
+
 
     
     def __repr__(self):
