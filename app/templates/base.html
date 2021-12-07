@@ -63,9 +63,9 @@
                         <div class="dropdown">
                             <a href="{{ url_for('manage_course') }}" class="nav-link">Manage Courses</a>
                             <div class="dropdown-content">
-                                <a href="#">Class-Setup</a>
-                                <a href="#">Course Registration</a>
-                                <a href="#">Grading</a>
+                                <a href="{{ url_for('class_setup') }}">Class-Setup</a>
+                                <a href="{{ url_for('course_registration') }}">Course Registration</a>
+                                <a href="{{ url_for('grading_period') }}">Grading</a>
                                 <a href="#">Your Classes</a>
                             </div>
 
