@@ -34,3 +34,9 @@ class DB:
             t["name"] = user["fname"]+" "+user["lname"]
             t["classname"] = classname["class_name"]
         return self.students_grade[:5]
+
+    def getClasses(self):
+        for t in self.class_json[:]:
+            user = next(x for x in self.users if x["id"]==t["professor_id"])
+            t["name"] = user["fname"]+" "+user["lname"]
+        return self.class_json[:]
