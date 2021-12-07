@@ -57,7 +57,9 @@ def requires_access_level(access_level):
 @login_required
 @requires_access_level(ACCESS['registrar'])
 def class_setup():
-    return render_template('class_setup.html', title='Class Setup')
+    database=DB()
+    classes = database.getClasses()
+    return render_template('class_setup.html', classes=classes, title='Class Setup')
 
 
 
