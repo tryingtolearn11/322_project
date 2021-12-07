@@ -100,7 +100,7 @@ class User(UserMixin):
 
 
 
-
+# Instructor Format
 class Instructor(User):
     def __init__(self, *args, **kwargs):
         super(Instructor, self).__init__(*args, **kwargs)
@@ -134,7 +134,7 @@ class Instructor(User):
 
 
 
-
+# Student Format
 class Student(User):
     def __init__(self, *args, **kwargs):
         super(Student, self).__init__(*args, **kwargs)
@@ -349,11 +349,11 @@ registered_users_table = [
 ]
 
 registered_courses_table = [
-    Course("1A", "Software", "3", "2021", "1", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
-    Course("2A", "Data Structures", "3", "2021", "2", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
-    Course("3A", "Algorithms", "3", "2021", "3", "1", "11:00 am - 12:15 pm", "NAC 2/204", "Closed"),
-    Course("4A", "Statistics", "3", "2021", "4", "4", "9:00 am - 11:15 am", "ONLINE", "Closed"),
-    Course("5A", "Operating System", "4", "2021", "5", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open"),]
+    Course("1A", "Software", "3", "2021", "100", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
+    Course("2A", "Data Structures", "3", "2021", "100", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
+    Course("3A", "Algorithms", "3", "2021", "100", "1", "11:00 am - 12:15 pm", "NAC 2/204", "Closed"),
+    Course("4A", "Statistics", "3", "2021", "100", "4", "9:00 am - 11:15 am", "ONLINE", "Closed"),
+    Course("5A", "Operating System", "4", "2021", "100", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open"),]
 
 
 
