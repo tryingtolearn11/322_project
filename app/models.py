@@ -51,9 +51,9 @@ class User(UserMixin):
         return check_password_hash(self.password_hash, password)
     
     @staticmethod
-    def generate_StudentID(digits):
-        student_id = ''.join(["{}".format(randint(0, 9)) for num in range(0, digits)])
-        return student_id
+    def generate_ID(digits):
+        object_id = ''.join(["{}".format(randint(0, 9)) for num in range(0, digits)])
+        return object_id
 
 
     def __repr__(self):
@@ -95,7 +95,7 @@ class User(UserMixin):
 class Student(User):
     def __init__(self, *args, **kwargs):
         super(Student, self).__init__(*args, **kwargs)
-        self.student_id = User.generate_StudentID(8)
+        self.student_id = User.generate_ID(8)
         self.grades = {}
         self.droppedCourses = {}
         self.currentClasses = {}
@@ -212,28 +212,19 @@ def load_user(user):
     return User.get(user)
 
 
-class Course():
+class Course:
     def __init__(self, courseID, courseName, credits, year):
         self.courseID = courseID
         self.courseName = courseName
         self.credits = credits
         self.year = year
-        self.instructor = None
-        self.roster = []
         self.cancelled = False
+        self.class_list = []
 
     # def assignInstructor(self, instructor):
 
-    # quick hack version of addStudent
-    def addStudent(self, student):
-        self.roster.append(student)
-
-    def removeStudent(self, student):
-        self.roster.pop(student)
-
-    def checkCourseStatus(self):
-        if len(self.roster) < 5:
-            self.cancelled = True
+    def addClass(self, class1):
+        self.class_list.append(class1)
 
 
     def __repr__(self):
@@ -251,10 +242,41 @@ class Course():
 
 
 
+class CourseClass(Course):
+    def __init__(self, *args, **kwargs):
+        super(Course, self).__init__(*args, **kwargs)
+        self.classID = User.generate_ID(5)
+        self.roster = []
+        self.instructor = None
+        self.courseID = None
+        self.courseName = None
+
+    def setCourseID(self, courseID):
+        course = Course.get(courseID)
+        if course in registered_courses_table:
+            print("found")
+            print(course)
+            self.courseID = course.courseID
+            self.courseName = course.courseName
+        else:
+            print("Course ID Not Found")
 
 
 
+    # quick hack version of addStudent
+    def addStudent(self, student):
+        self.roster.append(student)
 
+    def removeStudent(self, student):
+        self.roster.pop(student)
+
+    def checkClassStatus(self):
+        if len(self.roster) < 5:
+            self.cancelled = True
+
+
+    def __repr__(self):
+        return '<Class {}, {}>'.format(self.classID, self.courseName)
 
 
 

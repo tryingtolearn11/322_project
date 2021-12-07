@@ -1,7 +1,42 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h1>Course Registration Page</h1>
-
-
+<h1><center>Course Registration Page</center></h1>
+<hr/>
+<h5>1) Register between 2-4 courses.</h5>
+<h5>2) No time conflict among chosen classes.</h5>
+<h5>3) If class limit is reached, you will be put in the wait-list that only the course instructor can let in.</h5>
+<h5>4) You can retake the same class if you got F before.</h5>
+<body>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="h4 card-title text-success"> Computer Science Courses </div>
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <th>Course Name</th>
+                        <th>Section</th>
+                        <th>Professor</th>
+                        <th>Time</th>
+                        <th>Room</th>
+                        <th>Availability</th>
+                    </thead>
+                    <tbody>
+                        {% for class in classes %}
+                        <tr>
+                            <td>{{ class.class_name }}</td>
+                            <td>{{ class.id }}</td>
+                            <td>{{ class.name }}</td>
+                            <td>{{ class.time }}</td>
+                            <td>{{ class.room }}</td>
+                            <td>{{ class.status }}</td>
+                            <td><button type="button" class="btn btn-primary">register</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
     
 {% endblock %}
