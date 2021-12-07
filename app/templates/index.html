@@ -9,161 +9,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <h5>General Introduction of this Program:</h5>
-    <p>This program will be for users to choose, drop, and review courses to graduate from college.</p>
 </head>
-
-
 <body>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h4 card-title text-success"> Highest Rated Classes </div>
-                    <table class="table table-bordered">
-                        <thead class="text-center">
-                            <th>Class</th>
-                            <th>Professor</th>
-                            <th>Rating</th>
-                        </thead>
-                        <tbody>
-                            {% for class in high_class_data %}
-                            <tr>
-                                <td>{{ class.class_name }}</td>
-                                <td>{{ class.name }}</td>
-                                <td>{{ class.avg_rating }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+    <div class="main">
+        <div class="main-container">
+            <div class="main-content">
+                <h1>Providing essential student administration across the CUNY.</h1>
+                    <p>CUNYZERO allows to track and manage your classes</p>
+                    <button class="main-btn">
+                        <a href="#">Login</a>
+                    </button>
+            </div>
+            <div class="main-img-container">
+                <img src="static/img/photo.svg" alt="" id="main-img">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="h4 card-title text-success"> Highest Rated Classes </div>
+                        <table class="table table-bordered">
+                            <thead class="text-center">
+                                <th>Class</th>
+                                <th>Professor</th>
+                                <th>Rating</th>
+                            </thead>
+                            <tbody>
+                                {% for class in high_class_data %}
+                                <tr>
+                                    <td>{{ class.class_name }}</td>
+                                    <td>{{ class.name }}</td>
+                                    <td>{{ class.avg_rating }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h4 card-title text-danger"> Lowest Rated Classes </div>
-                    <table class="table table-bordered">
-                        <thead class="text-center">
-                            <th>Class</th>
-                            <th>Professor</th>
-                            <th>Rating</th>
-                        </thead>
-                        <tbody>
-                            {% for class in low_class_data %}
-                            <tr>
-                                <td>{{ class.class_name }}</td>
-                                <td>{{ class.name }}</td>
-                                <td>{{ class.avg_rating }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="h4 card-title text-danger"> Lowest Rated Classes </div>
+                        <table class="table table-bordered">
+                            <thead class="text-center">
+                                <th>Class</th>
+                                <th>Professor</th>
+                                <th>Rating</th>
+                            </thead>
+                            <tbody>
+                                {% for class in low_class_data %}
+                                <tr>
+                                    <td>{{ class.class_name }}</td>
+                                    <td>{{ class.name }}</td>
+                                    <td>{{ class.avg_rating }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h4 card-title text-primary">Top 5 Student With Highest GPA</div>
-                    <table class="table table-bordered">
-                        <thead class="text-center">
-                            <th>Student</th>
-                            <th>Course</th>
-                            <th>Grade</th>
-                        </thead>
-                        <tbody>
-                            {% for stud in student_grade %}
-                            <tr>
-                                <td>{{ stud.name }}</td>
-                                <td>{{ stud.classname }}</td>
-                                <td>{{ stud.gpa }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="h4 card-title text-primary">Top 5 Student With Highest GPA</div>
+                        <table class="table table-bordered">
+                            <thead class="text-center">
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Grade</th>
+                            </thead>
+                            <tbody>
+                                {% for stud in student_grade %}
+                                <tr>
+                                    <td>{{ stud.name }}</td>
+                                    <td>{{ stud.classname }}</td>
+                                    <td>{{ stud.gpa }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-
-
-
     
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h4 card-title text-success"> Highest Rated Classes </div>
-                    <table class="table table-bordered">
-                        <thead class="text-center">
-                            <th>Class</th>
-                            <th>Professor</th>
-                            <th>Rating</th>
-                        </thead>
-                        <tbody>
-                            {% for class in high_class_data %}
-                            <tr>
-                                <td>{{ class.class_name }}</td>
-                                <td>{{ class.name }}</td>
-                                <td>{{ class.avg_rating }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h4 card-title text-danger"> Lowest Rated Classes </div>
-                    <table class="table table-bordered">
-                        <thead class="text-center">
-                            <th>Class</th>
-                            <th>Professor</th>
-                            <th>Rating</th>
-                        </thead>
-                        <tbody>
-                            {% for class in low_class_data %}
-                            <tr>
-                                <td>{{ class.class_name }}</td>
-                                <td>{{ class.name }}</td>
-                                <td>{{ class.avg_rating }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h4 card-title text-primary">Top 5 Student With Highest GPA</div>
-                    <table class="table table-bordered">
-                        <thead class="text-center">
-                            <th>Student</th>
-                            <th>Course</th>
-                            <th>Grade</th>
-                        </thead>
-                        <tbody>
-                            {% for stud in student_grade %}
-                            <tr>
-                                <td>{{ stud.name }}</td>
-                                <td>{{ stud.classname }}</td>
-                                <td>{{ stud.gpa }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    
 
 
+
+
+<script src="app.js"></script>
 </body>
 </html>
 {% endblock %}
