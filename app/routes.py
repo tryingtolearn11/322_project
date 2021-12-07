@@ -89,9 +89,18 @@ def manage_course():
 
 @app.route('/your-classes')
 @login_required
-@requires_access_level(ACCESS['instructor'])
+@requires_access_level(ACCESS['student'])
 def instructor_classes():
-    return render_template('instructor_classes.html', title='Classes')
+    # Show current classes if User is student
+    if isinstance(current_user, Student):
+        current_classes = current_user.currentClasses
+        if len(current_classes) == 0:
+            current_classes = 0
+
+
+
+
+    return render_template('instructor_classes.html', title='Classes', current_classes=current_classes)
 
 # --------------------------------------------------------------------
 
