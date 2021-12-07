@@ -1,43 +1,22 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h1>Class Setup Page</h1>
+<h1><center>Class Setup Page</center></h1>
 <hr/>
 
-<style>
-    table, th, td {
-        border: 1px solid black;
-    }
-</style>
-<body>
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="h4 card-title text-success"> Computer Science Courses </div>
-                <table class="table table-bordered">
-                    <thead class="text-center">
-                        <th>Course</th>
-                        <th>Section</th>
-                        <th>Professor</th>
-                        <th>Time</th>
-                        <th>Room</th>
-                        <th>Availability</th>
-                    </thead>
-                    <tbody>
-                        {% for class in classes %}
-                        <tr>
-                            <td>{{ class.id }}</td>
-                            <td>{{ class.id }}</td>
-                            <td>{{ class.name }}</td>
-                            <td>{{ class.time }}</td>
-                            <td>{{ class.room }}</td>
-                            <td>{{ class.status }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="h4 card-title text-primary">Make a Class</div>
+            <table class="table table-bordered">
+                <thread class="text-center">
+                    <th>Class</th>
+                    <th>Class Time</th>
+                    <th>Course Instructor</th>
+                    <th>Class Size</th>
+                </thread>
+            </table>
         </div>
     </div>
-</body>
+</div>
     
 {% endblock %}

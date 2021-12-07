@@ -57,9 +57,7 @@ def requires_access_level(access_level):
 @login_required
 @requires_access_level(ACCESS['registrar'])
 def class_setup():
-    database=DB()
-    classes = database.getClasses()
-    return render_template('class_setup.html', classes=classes, title='Class Setup')
+    return render_template('class_setup.html', title='Class Setup')
 
 
 
@@ -67,7 +65,9 @@ def class_setup():
 @login_required
 @requires_access_level(ACCESS['registrar'])
 def course_registration():
-    return render_template('course_registration.html', title='Course Registration')
+    database=DB()
+    classes = database.getClasses()
+    return render_template('course_registration.html', classes=classes, title='Course Registration')
 
 
 @app.route('/grading')
