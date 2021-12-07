@@ -1,21 +1,33 @@
 {% extends "base.html" %}
 {% block main_content %}
 
-    <h1><center>COURSE PAGE</center></h1>
-    <hr/>
-   
-    <div>
-        {% if current_user.access == 3 %}
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('class_setup') }}"id="last_nav_link">Class-Setup</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('course_registration') }}"id="last_nav_link">Course Registration</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('grading_period')}}"id="last_nav_link">Grading</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
-        {% elif current_user.access >= 2 %}
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
-        {% endif %}
-        
-        
-    </div>
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage</title>
+</head>
+<body>
+    <div class="course_container">
+        <h1>Course Page</h1>
+        <div class="row">
+            <div class="col-md-2">
+                <ul>
+                    {% if current_user.access == 3 %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('class_setup') }}"id="last_nav_link">Class-Setup</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('course_registration') }}"id="last_nav_link">Course Registration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('grading_period')}}"id="last_nav_link">Grading</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
+                    {% elif current_user.access >= 2 %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
+                    {% endif %}
 
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 {% endblock %}
