@@ -195,8 +195,6 @@
 }
 
 .main-container {
-    /* text-align: justify;
-    text-justify: inter-word; */
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;

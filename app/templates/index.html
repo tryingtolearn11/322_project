@@ -12,20 +12,17 @@
 <body>
     <div class="main">
         <div class="main-container">
-            <div class="table-responsive">
-                <div class="main-content">
-                    <h1>Providing essential student administration across the CUNY.</h1>
-                        <p>CUNYZERO allows to track and manage your classes</p>
-                        <!-- <button class="main-btn">
-                            <a href="{{ url_for('login') }}">Login</a>
-                        </button> -->
-                        <img src="static/img/photo.svg" alt="" id="main-img" style="float: right;">
-                        <!--Put image in here to make text more centered, but login button is missing-->
-                </div>
-                <!-- <div class="main-img-container">
-                    <img src="static/img/photo.svg" alt="" id="main-img" style="float: right;">
-                </div> -->
+            <div class="main-content">
+                <h1>Providing essential student administration across the CUNY.</h1>
+                    <p>CUNYZERO allows to track and manage your classes</p>
+                    <button class="main-btn">
+                        <a href="{{ url_for('login') }}">Login</a>
+                    </button>
             </div>
+            <div class="main-img-container">
+                <img src="static/img/photo.svg" alt="" id="main-img">
+            </div>
+
         </div>
 
         <div class="row">
@@ -33,22 +30,25 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="h4 card-title text-success"> Highest Rated Classes </div>
-                        <table class="table table-bordered">
-                            <thead class="text-center">
-                                <th>Class</th>
-                                <th>Professor</th>
-                                <th>Rating</th>
-                            </thead>
-                            <tbody>
-                                {% for class in high_class_data %}
-                                <tr>
-                                    <td>{{ class.class_name }}</td>
-                                    <td>{{ class.name }}</td>
-                                    <td>{{ class.avg_rating }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="text-center">
+                                    <th>Class</th>
+                                    <th>Professor</th>
+                                    <th>Rating</th>
+                                </thead>
+                                <tbody>
+                                    {% for class in high_class_data %}
+                                    <tr>
+                                        <td>{{ class.class_name }}</td>
+                                        <td>{{ class.name }}</td>
+                                        <td>{{ class.avg_rating }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -56,22 +56,27 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="h4 card-title text-danger"> Lowest Rated Classes </div>
-                        <table class="table table-bordered">
-                            <thead class="text-center">
-                                <th>Class</th>
-                                <th>Professor</th>
-                                <th>Rating</th>
-                            </thead>
-                            <tbody>
-                                {% for class in low_class_data %}
-                                <tr>
-                                    <td>{{ class.class_name }}</td>
-                                    <td>{{ class.name }}</td>
-                                    <td>{{ class.avg_rating }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="text-center">
+                                    <th>Class</th>
+                                    <th>Professor</th>
+                                    <th>Rating</th>
+                                </thead>
+                                <tbody>
+                                    {% for class in low_class_data %}
+                                    <tr>
+                                        <td>{{ class.class_name }}</td>
+                                        <td>{{ class.name }}</td>
+                                        <td>{{ class.avg_rating }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -79,22 +84,24 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="h4 card-title text-primary">Top 5 Student With Highest GPA</div>
-                        <table class="table table-bordered">
-                            <thead class="text-center">
-                                <th>Student</th>
-                                <th>Course</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                {% for stud in student_grade %}
-                                <tr>
-                                    <td>{{ stud.name }}</td>
-                                    <td>{{ stud.classname }}</td>
-                                    <td>{{ stud.gpa }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="text-center">
+                                    <th>Student</th>
+                                    <th>Course</th>
+                                    <th>Grade</th>
+                                </thead>
+                                <tbody>
+                                    {% for stud in student_grade %}
+                                    <tr>
+                                        <td>{{ stud.name }}</td>
+                                        <td>{{ stud.classname }}</td>
+                                        <td>{{ stud.gpa }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +115,7 @@
 
 
 
-<script src="app.js"></script>
+
 </body>
 </html>
 {% endblock %}
