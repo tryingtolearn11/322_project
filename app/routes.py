@@ -65,9 +65,11 @@ def class_setup():
 @login_required
 @requires_access_level(ACCESS['registrar'])
 def course_registration():
-    database=DB()
-    classes = database.getClasses()
-    return render_template('course_registration.html', classes=classes, title='Course Registration')
+    courses = registered_courses_table
+    return render_template('course_registration.html', title='Course Registration', courses=courses)
+    # database=DB()
+    # classes = database.getClasses()
+    # return render_template('course_registration.html', classes=classes, title='Course Registration')
 
 
 @app.route('/grading')
