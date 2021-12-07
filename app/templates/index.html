@@ -1,9 +1,96 @@
 {% extends "base.html" %}
 {% block main_content %}
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <h5>General Introduction of this Program:</h5>
     <p>This program will be for users to choose, drop, and review courses to graduate from college.</p>
-    <hr/>
+</head>
+
+
+<body>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h4 card-title text-success"> Highest Rated Classes </div>
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <th>Class</th>
+                            <th>Professor</th>
+                            <th>Rating</th>
+                        </thead>
+                        <tbody>
+                            {% for class in high_class_data %}
+                            <tr>
+                                <td>{{ class.class_name }}</td>
+                                <td>{{ class.name }}</td>
+                                <td>{{ class.avg_rating }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h4 card-title text-danger"> Lowest Rated Classes </div>
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <th>Class</th>
+                            <th>Professor</th>
+                            <th>Rating</th>
+                        </thead>
+                        <tbody>
+                            {% for class in low_class_data %}
+                            <tr>
+                                <td>{{ class.class_name }}</td>
+                                <td>{{ class.name }}</td>
+                                <td>{{ class.avg_rating }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h4 card-title text-primary">Top 5 Student With Highest GPA</div>
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Grade</th>
+                        </thead>
+                        <tbody>
+                            {% for stud in student_grade %}
+                            <tr>
+                                <td>{{ stud.name }}</td>
+                                <td>{{ stud.classname }}</td>
+                                <td>{{ stud.gpa }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
@@ -77,4 +164,6 @@
     </div>
 
 
+</body>
+</html>
 {% endblock %}

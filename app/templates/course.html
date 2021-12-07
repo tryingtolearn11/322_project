@@ -1,31 +1,57 @@
 {% extends "base.html" %}
 {% block main_content %}
 
-    <h1><center>COURSE PAGE</center></h1>
-    <hr/>
-    
-    
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th>CourseID</th>
-                <th>Instructor</th>
-                <th>Course</th>
-                <th>Credits</th>
-                <th>Year</th>
-            </tr>
-        </thead>
-        {% for course in courses %}
-        <tr>
-            <td>{{ course.courseID }}</td>
-            <td> </td>
-            <td>{{ course.courseName }}</td>
-            <td>{{ course.credits }}</td>
-            <td>{{ course.year }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Course</title>
+    <h1><center>COURSE PAGE</center></h1>
+</head>
+    
+
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>CourseID</th>
+                        <th>Instructor</th>
+                        <th>Course</th>
+                        <th>Credits</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.courseID }}</td>
+                        <td> </td>
+                        <td>{{ course.courseName }}</td>
+                        <td>{{ course.credits }}</td>
+                        <td>{{ course.year }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>CourseID</th>
+                        <th>Instructor</th>
+                        <th>Course</th>
+                        <th>Credits</th>
+                        <th>Year</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    
+    
+
+</body>
+</html>
 {% endblock %}
