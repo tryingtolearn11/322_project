@@ -13,22 +13,24 @@
                 <div class="h4 card-title text-success"> Computer Science Courses </div>
                 <table class="table table-bordered">
                     <thead class="text-center">
-                        <th>Course Name</th>
-                        <th>Section</th>
-                        <th>Professor</th>
-                        <th>Time</th>
-                        <th>Room</th>
-                        <th>Availability</th>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Section</th>
+                            <th>Professor</th>
+                            <th>Time</th>
+                            <th>Room</th>
+                            <th>Availability</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        {% for class in classes %}
+                        {% for course in courses %}
                         <tr>
-                            <td>{{ class.class_name }}</td>
-                            <td>{{ class.id }}</td>
-                            <td>{{ class.name }}</td>
-                            <td>{{ class.time }}</td>
-                            <td>{{ class.room }}</td>
-                            <td>{{ class.status }}</td>
+                            <td>{{ course.courseName }}</td>
+                            <td>{{ course.courseID }}</td>
+                            <td>{{ course.professorID }}</td>
+                            <td>{{ course.time }}</td>
+                            <td>{{ course.room }}</td>
+                            <td>{{ course.status }}</td>
                             <td><button type="button" class="btn btn-primary">register</button></td>
                         </tr>
                         {% endfor %}
