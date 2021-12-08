@@ -370,24 +370,34 @@ class CourseClass(Course):
 # Dummy Data
 registered_users_table = [
     User("susan", 'cat'), # Registrars
+    User("josh", "miranda"),
+    User("jinx", 'arcane'),
     Instructor("john", 'dog'), # Instructor
     Instructor("mary", 'bad'),
     Instructor("hank",'bird'),
+    Instructor("bob", 'duncan'),
+    Instructor("julia", 'twitch'),
     Student("tom",'fish'),
     Student("max",'mouse'),
     Student("jax",'rat'),
     Student("sofia",'snake'),
     Student("damien",'singh'),
     Student("bill", 'monkey'),
-    Student("frank",'night')
+    Student("frank",'night'),
+    Student("katy", "wenis")
 ]
 
 registered_courses_table = [
     Course("1A", "Software", "3", "2021", "john", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
-    Course("2A", "Data Structures", "3", "2021", "john", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
-    Course("3A", "Algorithms", "3", "2021", "john", "1", "11:00 am - 12:15 pm", "NAC 2/204", "Closed"),
+    Course("1B", "Software", "3", "2021", "mary", "5", "11:00 am - 2:15 pm", "ONLINE", "Open"),
+    Course("2A", "Data Structures", "3", "2021", "john", "3", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
+    Course("3A", "Algorithms", "3", "2021", "john", "3", "11:00 am - 12:15 pm", "NAC 2/204", "Closed"),
     Course("4A", "Statistics", "3", "2021", "mary", "4", "9:00 am - 11:15 am", "ONLINE", "Closed"),
-    Course("5A", "Operating System", "4", "2021", "hank", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open"),]
+    Course("5A", "Operating System", "4", "2021", "hank", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open"),
+    Course("6A", "Intro to Computer Science", "3", "2021", "hank", "2", "12:00 pm - 3:15 pm", "NAC 5/502", "Open"),
+    Course("7A", "Java", "3", "2021", "bob", "1", "10:00 am - 11:15 am", "Sheperd 2/209", "Open"),
+    Course("8A", "Technical Elective 1", "3", "2021", "mary", "4", "8:00 am - 9:00 am", "NAC 3/306", "Open"),
+    Course("9A", "Technical Elective 2", "3", "2021", "julia", "2", "3:00 pm - 4:15 pm", "NAC 1/104", "Closed")]
 
 
 
