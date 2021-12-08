@@ -11,6 +11,83 @@
 </head>
 <body>
     <div class="container">
+        <div class="table-responsive">
+            <h1>Grades</h1>
+
+            {% for c, key in courses.items() %}
+            <h3> {{ key.courseID }}</h3>
+
+            <li><a href="{{ url_for('course_page', courseID =
+                    key.courseID)}}">{{ key.courseName }}</a></li>
+            {% endfor %}
+
+
+        </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+
+            {% for c, key in courses.items() %}
+            <h3> {{ key.courseID }}</h3>
+
+            <li><a href="{{ url_for('course_page', courseID =
+                    key.courseID)}}">{{ key.courseName }}</a></li>
+                <tbody>
+                    <tr>
+                        <th>1</th>
+                        <td> <a href="{{ url_for('course_page', courseID=key.courseID)}}">{{ key.courseName }}</a>
+                        </td>
+
+                        <td>Nixon</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>A</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Grade</th>
+                    </tr>
+                </tfoot>
+            {% endfor %}
+            </table>
         <div class="col-12">
             <div class="table-responsive">
                 <h1><center>Grades</center></h1>
@@ -83,6 +160,8 @@
         </div>
         
     </div>
+    <div>
+
     
     
 

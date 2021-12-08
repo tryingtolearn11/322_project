@@ -232,10 +232,7 @@ class Student(User):
             print("Student Will be suspended")
 
     def addClass(self, class1):
-        self.currentClasses[class1.courseName] = {class1.courseID,
-                                                  class1.courseName,
-                                                  class1.credits,
-                                                  class1.year}
+        self.currentClasses[class1.courseName] = class1
 
     def dropClass(self, courseID):
         try:
@@ -321,10 +318,7 @@ class CourseClass(Course):
     # quick hack version of addStudent
     def addStudent(self, student):
         self.roster.append(student)
-        student.currentClasses[self.courseID] = {self.courseName,
-                                                self.classID,
-                                                self.credits,
-                                                self.year}
+        student.currentClasses[self.courseID] = self
 
     def removeStudent(self, student):
         self.roster.pop(student)
@@ -335,10 +329,7 @@ class CourseClass(Course):
 
     def assignInstructor(self, instructor):
         self.instructor = instructor
-        instructor.current_classes[self.classID] = {self.courseID,
-                                                   self.courseName,
-                                                   self.credits,
-                                                   self.year}
+        instructor.current_classes[self.classID] = self
 
 
 
@@ -399,6 +390,8 @@ c1.addStudent(User.get("jax"))
 c1.addStudent(User.get("sofia"))
 c1.assignInstructor(User.get("john"))
 
+course1A = Course.get("1A")
+course1A.addClass(c1)
 
 
 c2 = CourseClass()
