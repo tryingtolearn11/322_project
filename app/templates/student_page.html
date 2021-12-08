@@ -1,23 +1,74 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h1><center>Student Page</center></h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1><center>Student Page</center></h1>
+</head>
 
 
-
-    <h3> {{ student.username }} </h3>
-
-    <h4> Grades : </h4>
-    {% for k, v in student.grades.items() %}
-    <li>{{ v[1].courseName }} : {{ v[0] }}</li>
-    {% endfor %}
-
-    <h4> Currently Taking : </h4>
-    {% for k, v in student.currentClasses.items() %}
-    <li>{{ v.courseName }}</li>
-    {% endfor %}
-    <h4> Overall Gpa </h4>
-    <h3> {{ student.overallGPA }} </h3>
-
-
+<body>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="h5 card-title text-default text-center">Student Name: {{ student.username }}</div>
+                <div class="account-content">
+                    <div class="account-desc">
+                        <h5 class="account-item"><a class="account-link" href="#">Click for Tutorial</a></h5>
+                        <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p> -->
+                    </div>
+                </div>
+                <div class="h2 card-title text-success text-center">Grades</div>
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for k, v in student.grades.items() %}
+                        <tr>
+                            <td>{{ v[1].courseName }}</td> 
+                            <td>{{ v[0] }}</td>               
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th><div class="h2 text-success text-center">Current Classes</div></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {% for k, v in student.currentClasses.items() %}
+                        <tr>
+                            <td>{{ v.courseName }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th><div class="h2 text-success text-center">Overall GPA</div></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>{{ student.overallGPA }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
     
 {% endblock %}

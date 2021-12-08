@@ -9,32 +9,42 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>COURSE History</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>CourseID</th>
-                <th>Course</th>
-                <th>Grade</th>
-                <th>Credits</th>
-                <th>Year</th>
-            </tr>
-        </thead>
-        <tr>
-            {% if past_courses == 0 %}
-                <h3>No History Available</h3>
-            {% else %}
-                {% for course_id, info in past_courses.items() %}
-                    <td>{{ course_id }}</td>
-                    <td>{{ info[1] }}</td>
-                    <td>{{ info[0] }}</td>
-                    <td>{{ info[2] }}</td>
-                    <td>{{ info[3] }}</td>
-            </tr>
-                {% endfor %}
-            {% endif %}
-    </table>
-    
+    <h1><center>Course History</center></h1>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>CourseID</th>
+                                <th>Course</th>
+                                <th>Grade</th>
+                                <th>Credits</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            {% if past_courses == 0 %}
+                                <h3>No History Available</h3>
+                            {% else %}
+                                {% for course_id, info in past_courses.items() %}
+                                    <td>{{ course_id }}</td>
+                                    <td>{{ info[1] }}</td>
+                                    <td>{{ info[0] }}</td>
+                                    <td>{{ info[2] }}</td>
+                                    <td>{{ info[3] }}</td>
+                            </tr>
+                                {% endfor %}
+                            {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- <div clas="table-responsive"> -->
+            
+        <!-- </div> -->
+    </div>
 </body>
 </html>
 {% endblock %}
