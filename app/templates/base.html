@@ -83,28 +83,33 @@
         
 
     <main>
+        <div class="warning-container col-md-12">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <li>{{ message }}</li>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                
 
+
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        
+            <div class="main_content">
+                {% block main_content%}{% endblock%}
+            </div>
+            
+
+        </div>
     </main>
 
-
-
-
-
-    <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-    
-    <div class="main_content">
-        {% block main_content%}{% endblock%}
-    </div>
-   
 
 
 

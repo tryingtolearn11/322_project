@@ -11,6 +11,12 @@
     padding-left: 15px;
 }
 
+.warning-container {
+    background-color: #31373d;
+    padding: 10px;
+
+}
+
 /* Drop down menu*/
 
 .dropdown-content {
