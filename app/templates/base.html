@@ -83,13 +83,13 @@
         
 
     <main>
-        <div class="warning-container col-md-12">
+        <div class="warning-container">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             <ul>
                 {% for message in messages %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <li>{{ message }}</li>
+                    <span>{{ message }}</span>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
