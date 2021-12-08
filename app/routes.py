@@ -66,6 +66,7 @@ def class_setup():
 @requires_access_level(ACCESS['student'])
 def course_registration():
     courses = registered_courses_table_nextSemester
+    cart = 0
     if isinstance(current_user, Student):
         cart = current_user.shoppingCart
         if len(cart) == None:
@@ -99,6 +100,7 @@ def addToCart(courseID):
         return redirect(url_for('course_registration'))
     else:
         flash("User is Not a Student")
+        return redirect(url_for('course_registration'))
     
 
 @app.route('/course-registration/<string:courseID>/remove')
@@ -108,6 +110,7 @@ def removeFromCart(courseID):
         return redirect(url_for('course_registration'))
     else:
         flash("User is Not a Student")
+        return redirect(url_for('course_registration'))
 
 
 
@@ -117,9 +120,8 @@ def removeFromCart(courseID):
 def grading_period():
     if isinstance(current_user, Instructor):
         courses = current_user.current_classes
-        print(courses)
     else:
-        flash("To be fixed tommorw")
+        flash("You Have no Classes")
         return redirect(url_for('manage_course'))
     return render_template('grading.html', title='Grading', courses=courses)
 
