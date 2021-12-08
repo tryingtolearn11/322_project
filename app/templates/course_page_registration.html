@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block main_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% if class_list == None %}
+<h3> No Classes Available </h3>
+{% else %}
+{% for c in class_list %}
+<li> Class ID : {{ c.classID }}</li>
+<li> Course ID : {{ c.courseID }}</li>
+<li> Class seats : {{ c.seatsNextSemester }}</li>
+<button type="button" class="btn btn-primary"> <a href="{{
+        url_for('addToCart', courseID=c.courseID)}}">Add to shopping Cart</a></button>
+{% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

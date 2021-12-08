@@ -5,8 +5,17 @@
 
 
     <h3> {{ student.username }} </h3>
-    <h3> {{ student.grades }} </h3>
-    <h3> {{ student.currentClasses }} </h3>
+
+    <h4> Grades : </h4>
+    {% for k, v in student.grades.items() %}
+    <li>{{ v[1].courseName }} : {{ v[0] }}</li>
+    {% endfor %}
+
+    <h4> Currently Taking : </h4>
+    {% for k, v in student.currentClasses.items() %}
+    <li>{{ v.courseName }}</li>
+    {% endfor %}
+    <h4> Overall Gpa </h4>
     <h3> {{ student.overallGPA }} </h3>
 
 
