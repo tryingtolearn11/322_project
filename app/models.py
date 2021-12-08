@@ -148,7 +148,26 @@ class Student(User):
         self.overallGPA = 0
         self.gpaBySemester = []
         self.coursesBySemester = []
+        self.shoppingCart = []
+        self.registered_next_semester = []
 
+
+    def addToShoppingCart(self, courseID):
+        c = CourseClass.get(courseID)
+        if c not in self.shoppingCart:
+            self.shoppingCart.append(c)
+        else:
+            print("Class {} is already in shopping cart".format(CourseClass.get(courseID).classID))
+
+
+    def enrollCart(self):
+        if len(self.shoppingCart) == 0:
+            print("Empty Cart")
+        else:
+            for c in self.shoppingCart:
+                self.registered_next_semester.append(c)
+                c.seatsNextSemester += 1
+                c.enrolledNextSemester.append(self)
 
     def addGrade(self, grade, course):
         self.grades[course.courseID] = [grade, course]
@@ -301,6 +320,9 @@ class Course:
         for course in registered_courses_table:
             if courseID == course.courseID:
                 return course
+        for course in registered_courses_table_nextSemester:
+            if courseID == course.courseID:
+                return course
         print("Course Not Found in DB")
         return None
 
@@ -318,10 +340,12 @@ class CourseClass(Course):
         self.credits = None
         self.year = None
         self.passedStudents = []
+        self.enrolledNextSemester = []
+        self.seatsNextSemester = 0
 
     def setCourseID(self, courseID):
         course = Course.get(courseID)
-        if course in registered_courses_table:
+        if course in registered_courses_table or course in registered_courses_table_nextSemester:
             #print("found")
             #print(course)
             self.courseID = course.courseID
@@ -354,6 +378,9 @@ class CourseClass(Course):
     @classmethod
     def get(cls, courseID):
         for c in registered_classes_table:
+            if courseID == c.courseID:
+                return c
+        for c in registered_classes_table_nextSemester:
             if courseID == c.courseID:
                 return c
         print("Class Not Found in DB")
@@ -401,7 +428,12 @@ registered_courses_table = [
 
 
 
-
+registered_courses_table_nextSemester = [
+        Course("1B", "Software", "3", "2022", "100", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
+        Course("2B", "Data Structures", "3", "2022", "100", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
+        Course("3B", "Algorithms", "3", "2022", "100", "1", "11:00am - 12:15 pm", "NAC 2/204", "Closed"),
+        Course("4B", "Statistics", "3", "2022", "100","4", "9:00 am - 11:15 am", "ONLINE","Closed"),
+        Course("5B", "Operating System", "4", "2022", "100", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open")]
 
 
 
@@ -434,11 +466,14 @@ c3.setCourseID("3A")
 
 
 
-
+c1B = CourseClass()
+c1B.setCourseID("1B")
+Course.get("1B").addClass(c1B)
 
 
 
 registered_classes_table = [c1, c2, c3]
+registered_classes_table_nextSemester = [c1B]
 
 Max = User.get("max")
 
