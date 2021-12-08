@@ -117,16 +117,32 @@ def instructor_classes():
 # --------------------------------------------------------------------
 
 
-@app.route('/courses/<string:courseID>')
+@app.route('/courses/<string:courseID>', methods=['GET', 'POST'])
 @login_required
 def course_page(courseID):
     course = Course.get(courseID)
     print(course.class_list)
     class_list = course.class_list
+
     return render_template('course_page.html',
                            title="{}".format(course.courseName),
                            class_list=class_list)
 
+
+@app.route('/courses/<string:courseID>/<string:studentUsername>/assignGrade', methods=['GET', 'POST'])
+@login_required
+def assignGrade(studentUsername, courseID):
+    data = request.form['text']
+    print(data)
+    student = User.get(studentUsername)
+    course = Course.get(courseID)
+    student.addGrade(data.upper(), course)
+
+    return redirect(url_for('course_page', courseID=courseID))
+    
+
+    
+    
 
 
 @app.route('/students/<string:studentUsername>')

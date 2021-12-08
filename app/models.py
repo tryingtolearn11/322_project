@@ -152,6 +152,18 @@ class Student(User):
 
     def addGrade(self, grade, course):
         self.grades[course.courseID] = [grade, course]
+        print(self.currentClasses)
+        classes = course.class_list
+        for c in classes:
+            if self in c.roster:
+                print("{} is found in class {}".format(self.username, c.classID))
+                c.removeStudent(self)
+                c.passedStudents.append(self)
+                self.currentClasses.pop(c.courseID)
+                print("{} Grades : {}".format(self.username, self.grades))
+            else:
+                print("Student {} not found in this class".format(self.username))
+
 
 
     @staticmethod
@@ -305,6 +317,7 @@ class CourseClass(Course):
         self.courseName = None
         self.credits = None
         self.year = None
+        self.passedStudents = []
 
     def setCourseID(self, courseID):
         course = Course.get(courseID)
@@ -326,7 +339,7 @@ class CourseClass(Course):
         student.currentClasses[self.courseID] = self
 
     def removeStudent(self, student):
-        self.roster.pop(student)
+        self.roster.remove(student)
 
     def checkClassStatus(self):
         if len(self.roster) < 5:

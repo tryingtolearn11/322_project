@@ -22,7 +22,8 @@
                     </button>
                     {% elif current_user.is_authenticated %}
                     <button class="main-btn">
-                        <a href="{{ url_for('account') }}">Welcome!</a>
+                        <a href="{{ url_for('account') }}">Welcome
+                            {{current_user.username }}!</a>
                     </button>
                     {% endif %}
 
