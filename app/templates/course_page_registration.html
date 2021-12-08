@@ -18,7 +18,9 @@
 <li> Course ID : {{ c.courseID }}</li>
 <li> Class seats : {{ c.seatsNextSemester }}</li>
 <button type="button" class="btn btn-primary"> <a href="{{
-        url_for('addToCart', courseID=c.courseID)}}">Add to shopping Cart</a></button>
+        url_for('addToCart', courseID=c.courseID)}}">Add to Shopping Cart</a></button>
+<button type="button" class="btn btn-danger"> <a href="{{
+        url_for('removeFromCart', courseID=c.courseID)}}">Remove from Shopping Cart</a></button>
 {% endfor %}
 {% endif %}
 </body>

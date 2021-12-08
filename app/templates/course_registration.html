@@ -13,7 +13,6 @@
     <h5>2) No time conflict among chosen classes.</h5>
     <h5>3) If class limit is reached, you will be put in the wait-list that only the course instructor can let in.</h5>
     <h5>4) You can retake the same class if you got F before.</h5>
-    <h5> {{current_user.shoppingCart}}</h5>
 </head>
 
 <body>
@@ -52,6 +51,15 @@
             </div>
         </div>
     </div>
+    <div>
+        <h3>Currently in Cart:</h3>
+        {% if cart != 0 %}
+            {% for c in cart %}
+            <li> {{ c.courseName }}, {{ c.classID }}</li>
+            {% endfor %}
+        {% endif %}
+    </div>
+        
         
 </body>
 </html>
