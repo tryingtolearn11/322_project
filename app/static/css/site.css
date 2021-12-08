@@ -385,9 +385,18 @@
     line-height: 2;
 }
 
+.study {
+    height: 700px;
+    width: 100%;
+}
+
 @media screen and (max-width: 768px) {
     .account-grid {
         grid-template-columns: 1fr;
+    }
+
+    .study {
+        display: none;
     }
 }
 
@@ -422,4 +431,106 @@
     }
 
 }
+
+/* Mange Course*/
+
+.course{
+    background: white;
+    color: black;
+    position: relative;
+}
+
+.course-container {
+    background: white;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 100px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 700px;
+}
+
+.course-container h1 {
+    font-size: 50px;
+}
+
+.course-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 50px;
+}
+
+.course-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.course-content img {
+    margin-right: 50px;
+    max-width: 10%;
+    height: auto;
+}
+
+.course-desc h2 {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.course-desc p {
+    line-height: 2;
+}
+
+
+.manage {
+    height: 700px;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .manage {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .course-container {
+        padding: 100px;
+        padding-bottom: 160px;
+        padding-left: 16px;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 900px;
+    }
+
+    .course-container h1 {
+        text-align: center;
+        margin-bottom: 160px;
+    }
+
+    .course-left {
+        padding: 0 24px;
+
+    }
+    
+    .course-content {
+        margin-top: 40px;
+    }
+
+    .course-content img {
+        margin-right: 16px;
+    }
+
+}
+
 
