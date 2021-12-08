@@ -340,3 +340,8 @@ def complaint():
         return redirect(url_for('index'))
     return render_template('complaint.html', title='Complaints', form=form)
 
+#Tutorial Page
+@app.route("/tutorial")
+@login_required
+def tutorial():
+    return render_template('tutorial.html', title='Tutorial')
