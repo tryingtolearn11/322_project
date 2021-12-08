@@ -190,6 +190,11 @@
 }
 
 /* index page */
+.table-container {
+    padding: 20px;
+
+}
+
 .main {
     background-color: #31373d;
 }
