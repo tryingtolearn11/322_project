@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block main_content %}
+<h1><center>Course Page</center></h1>
+
+
+
+
+
+{% for k in class_list %}
+    <h3> {{ k.courseName }} </h3>
+    <h3> {{ k.classID }} </h3>
+    <h3> {{ k.courseID }} </h3>
+    {% for s in k.roster %}
+    <li><a href="{{url_for('student_page', studentUsername = s.username) }}">{{ s.student_id }}, {{ s.username }}</a></li>
+    {% endfor %}
+
+{% endfor %}
+
+    
+{% endblock %}

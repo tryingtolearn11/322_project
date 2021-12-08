@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, url_for, redirect, flash, request, session
 from app.forms import LoginForm, ComplaintForm, RegistrationForm
 from app.functions.package import userInfo
-from app.models import User, Student, registered_users_table, registered_users_complaints, ACCESS, Tom, registered_courses_table
+from app.models import *
 from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
 from functools import wraps
@@ -74,9 +74,12 @@ def course_registration():
 
 @app.route('/grading')
 @login_required
-@requires_access_level(ACCESS['registrar'])
+@requires_access_level(ACCESS['instructor'])
 def grading_period():
-    return render_template('grading.html', title='Grading')
+    if isinstance(current_user, Instructor):
+        courses = current_user.current_classes
+        print(courses)
+    return render_template('grading.html', title='Grading', courses=courses)
 
 
 @app.route('/manage-course')
@@ -105,6 +108,40 @@ def instructor_classes():
     return render_template('instructor_classes.html', title='Classes', current_classes=current_classes)
 
 # --------------------------------------------------------------------
+
+
+@app.route('/courses/<string:courseID>')
+@login_required
+def course_page(courseID):
+    course = Course.get(courseID)
+    print(course.class_list)
+    class_list = course.class_list
+    return render_template('course_page.html',
+                           title="{}".format(course.courseName),
+                           class_list=class_list)
+
+
+
+@app.route('/students/<string:studentUsername>')
+@login_required
+def student_page(studentUsername):
+    student = User.get(studentUsername)
+    return render_template('student_page.html', student=student)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Home Page 
 @app.route('/')
@@ -218,6 +255,10 @@ def course_history():
                            past_courses=past_courses)
 
 
+@app.route("/course_registration/register")
+@login_required
+def register_class():
+    return render_template('register_class.html', title='Register for Class')
 
 
 

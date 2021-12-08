@@ -20,7 +20,6 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>CourseID</th>
-                        <th>Instructor</th>
                         <th>Course</th>
                         <th>Credits</th>
                         <th>Year</th>
@@ -30,7 +29,6 @@
                     {% for course in courses %}
                     <tr>
                         <td>{{ course.courseID }}</td>
-                        <td>{{ course.professorID}} </td>
                         <td>{{ course.courseName }}</td>
                         <td>{{ course.credits }}</td>
                         <td>{{ course.year }}</td>
@@ -41,7 +39,6 @@
                 <tfoot>
                     <tr>
                         <th>CourseID</th>
-                        <th>Instructor</th>
                         <th>Course</th>
                         <th>Credits</th>
                         <th>Year</th>
