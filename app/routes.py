@@ -63,7 +63,7 @@ def class_setup():
 
 @app.route('/course-registration')
 @login_required
-@requires_access_level(ACCESS['registrar'])
+@requires_access_level(ACCESS['student'])
 def course_registration():
     courses = registered_courses_table
     return render_template('course_registration.html', title='Course Registration', courses=courses)
@@ -127,21 +127,6 @@ def course_page(courseID):
 def student_page(studentUsername):
     student = User.get(studentUsername)
     return render_template('student_page.html', student=student)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Home Page 
 @app.route('/')
