@@ -151,7 +151,7 @@ class Student(User):
 
 
     def addGrade(self, grade, course):
-        self.grades[course.courseID] = [grade, course.courseName, course.credits, course.year]
+        self.grades[course.courseID] = [grade, course]
 
 
     @staticmethod
@@ -188,7 +188,7 @@ class Student(User):
         numOfCredits = 0
         for key, value in self.grades.items():
             grade_value += Student.convertLetterToGrade(value[0])
-            credit += int(value[2])
+            credit += int(value[1].credits)
             numOfCredits += 1
             #print("Grade value {}, credits {}".format(grade_value, credit))
         gpa = float(grade_value / numOfCredits)
@@ -321,8 +321,8 @@ class CourseClass(Course):
     # quick hack version of addStudent
     def addStudent(self, student):
         self.roster.append(student)
-        student.currentClasses[self.classID] = {self.courseID,
-                                                self.courseName,
+        student.currentClasses[self.courseID] = {self.courseName,
+                                                self.classID,
                                                 self.credits,
                                                 self.year}
 
