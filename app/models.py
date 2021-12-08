@@ -159,6 +159,15 @@ class Student(User):
         else:
             print("Class {} is already in shopping cart".format(CourseClass.get(courseID).classID))
 
+    def removeFromShoppingCart(self, courseID):
+        c = CourseClass.get(courseID)
+        if c in self.shoppingCart:
+            self.shoppingCart.remove(c)
+            print("{} Class is removed".format(c.courseName))
+        else:
+            print("Class {} is not in shopping cart".format(CourseClass.get(courseID).classID))
+
+
 
     def enrollCart(self):
         if len(self.shoppingCart) == 0:

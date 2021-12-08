@@ -66,7 +66,12 @@ def class_setup():
 @requires_access_level(ACCESS['student'])
 def course_registration():
     courses = registered_courses_table_nextSemester
-    return render_template('course_registration.html', title='Course Registration', courses=courses)
+    if isinstance(current_user, Student):
+        cart = current_user.shoppingCart
+        if len(cart) == None:
+            cart = 0
+            flash("Your Cart is empty")
+    return render_template('course_registration.html', title='Course Registration',courses=courses, cart=cart)
 
 
 @app.route('/course-registration/<string:courseID>')
@@ -87,7 +92,7 @@ def course_page_registration(courseID):
 
 
 
-@app.route('/course-registration/<string:courseID>/')
+@app.route('/course-registration/<string:courseID>/add')
 def addToCart(courseID):
     if isinstance(current_user, Student):
         current_user.addToShoppingCart(courseID)
@@ -96,6 +101,13 @@ def addToCart(courseID):
         flash("User is Not a Student")
     
 
+@app.route('/course-registration/<string:courseID>/remove')
+def removeFromCart(courseID):
+    if isinstance(current_user, Student):
+        current_user.removeFromShoppingCart(courseID)
+        return redirect(url_for('course_registration'))
+    else:
+        flash("User is Not a Student")
 
 
 
