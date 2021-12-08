@@ -1,20 +1,52 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h1><center>Course Page</center></h1>
-
-
-
-
-
-{% for k in class_list %}
-    <h3> {{ k.courseName }} </h3>
-    <h3> {{ k.classID }} </h3>
-    <h3> {{ k.courseID }} </h3>
-    {% for s in k.roster %}
-    <li><a href="{{url_for('student_page', studentUsername = s.username) }}">{{ s.student_id }}, {{ s.username }}</a></li>
-    {% endfor %}
-
-{% endfor %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1><center>Course Page</center></h1>
+</head>
+<body>
     
+
+<div class="col-12">
+    <div class="table-responsive">
+        {% for k in class_list %}
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>StudentID</th>
+                    <th>First Name</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in k.roster %}
+                <tr>
+                    <td><a href="{{url_for('student_page', studentUsername=s.username) }}">{{ s.student_id }}</a></td>
+                    <td><a href="{{url_for('student_page', studentUsername=s.username) }}">{{ s.username }}</a></td>
+                    <td><input value="" type="text" placeholder="Enter Grade"></td>
+                    <td><button type="button" class="btn btn-primary">submit</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>StudentID</th>
+                    <th>First Name</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
 {% endblock %}

@@ -79,6 +79,9 @@ def grading_period():
     if isinstance(current_user, Instructor):
         courses = current_user.current_classes
         print(courses)
+    else:
+        flash("To be fixed tommorw")
+        return redirect(url_for('manage_course'))
     return render_template('grading.html', title='Grading', courses=courses)
 
 
