@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block main_content %}
 <h1><center>Your Classes</center></h1>
+{% for k, v in current_classes.items() %}
+    <p>{{ v.courseID }}</p>
+    <p>{{ v.courseName }}</p>
+    <p>{{ v.instructor.username }}</p>
+{% endfor %}
+
 
 
     

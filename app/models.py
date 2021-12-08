@@ -185,33 +185,38 @@ class Student(User):
     def calculateGPA(self):
         grade_value = 0
         credit = 0
-        numOfCredits = 0
+        numOfClasses = 0
+        if len(self.grades) == 0:
+            return None
         for key, value in self.grades.items():
             grade_value += Student.convertLetterToGrade(value[0])
-            credit += int(value[1].credits)
-            numOfCredits += 1
-            #print("Grade value {}, credits {}".format(grade_value, credit))
-        gpa = float(grade_value / numOfCredits)
+            numOfClasses += 1
+        print("Grade value {}, credits {}".format(grade_value, credit))
+        gpa = float(grade_value / numOfClasses)
         self.gpaBySemester.append(gpa)
-        # print(gpa)
+        print(gpa)
         return gpa
 
     def evaluateGPA(self):
         semester_gpa = self.calculateGPA()
         overall_gpa = 0
+        
+        if semester_gpa == None:
+            return None
 
-        for i in self.gpaBySemester:
-            overall_gpa += i
-        self.overallGPA = overall_gpa / len(self.gpaBySemester)
+        else:
+            for i in self.gpaBySemester:
+                overall_gpa += i
+            self.overallGPA = overall_gpa / len(self.gpaBySemester)
 
-        if semester_gpa >= 2 and semester_gpa <= 2.25:
-            self.addWarnings(1)
+            if semester_gpa >= 2 and semester_gpa <= 2.25:
+                self.addWarnings(1)
 
-        if semester_gpa >= 3.75 or self.overallGPA > 3.5:
-            self.honorRoll = True
-            # Can remove 1 warning if any
-            if self.warning > 0:
-                self.warning -= 1
+            if semester_gpa >= 3.75 or self.overallGPA > 3.5:
+                self.honorRoll = True
+                # Can remove 1 warning if any
+                if self.warning > 0:
+                    self.warning -= 1
 
 
 

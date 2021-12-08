@@ -105,8 +105,12 @@ def instructor_classes():
         if len(current_classes) == 0:
             current_classes = 0
 
-
-
+    # If User is Instructor
+    if isinstance(current_user, Instructor):
+        current_classes = current_user.current_classes
+        if len(current_classes) == 0:
+            current_classes = 0
+    print(current_classes)
 
     return render_template('instructor_classes.html', title='Classes', current_classes=current_classes)
 
@@ -129,6 +133,9 @@ def course_page(courseID):
 @login_required
 def student_page(studentUsername):
     student = User.get(studentUsername)
+    gpa = student.evaluateGPA()
+    if gpa == None:
+        flash("GPA unavailable")
     return render_template('student_page.html', student=student)
 
 # Home Page 
