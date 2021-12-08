@@ -10,22 +10,52 @@
     <title>Information</title>
 </head>
 <body>
-    <div class="account_container">
-        <h1>Account Information</h1>
-        <div class="row">
-            <div class="col-md-10">
-                <ul>
-                    <li class="account-item"><a class="account-link" href="{{url_for('course_history')}}">Personal Record</a></li>
-                    <li class="account-item"><a class="account-link" href="#">Apply For Graduation</a></li>
-                    <li class="account-item"><a class="account-link" href="#">Tutorial</a></li>
-                    {% if current_user.access >= 2 %}
-                        <li class="account-item"><a class="account-link" href="#">All Academic Records</a></li>
-                    {%  endif %}
+    <div class="account">
+        <div class="account-container">
+            <h1>Account</h1>
+            <div class="account-grid">
+                
+                <div class="account-left">
+                    <div class="account-content">
+                        <img src="static/img/clipboard.svg" alt="record">
+                        <div class="account-desc">
+                            <h2 class="account-item"><a class="account-link" href="{{url_for('course_history')}}">Personal Record</a></h2>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p>
+                        </div>
+                    </div>
+                    <div class="account-content">
+                        <img src="static/img/graduate.svg" alt="grad">
+                        <div class="account-desc">
+                            <h2 class="account-item"><a class="account-link" href="#">Apply For Graduation</a></h2>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p>
+                        </div>
+                    </div>
+                    <div class="account-content">
+                        <img src="static/img/learn.svg" alt="tut">
+                        <div class="account-desc">
+                            <h2 class="account-item"><a class="account-link" href="#">Tutorial</a></h2>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p>
+                        </div>
+                    </div>
 
-                </ul>
+                    {% if current_user.access >= 2 %}
+                    <div class="account-content">
+                        <img src="static/img/admin.svg" alt="all rec">
+
+                        <div class="account-desc">
+                            <h2 class="account-item"><a class="account-link" href="#">All Academic Records</a></h2>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p>
+                        </div>
+                        
+                    </div>
+                    {% endif %}
+
+                    
+                </div>
             </div>
         </div>
     </div>
+    
 </body>
 </html>
 {% endblock %}

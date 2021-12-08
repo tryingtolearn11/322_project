@@ -1,8 +1,3 @@
-.account_container {
-    padding-left: 15px;
-    font-size: larger;
-}
-
 .course_container {
     padding-left: 15px;
     font-size: larger;
@@ -335,3 +330,94 @@
     }
     
 }
+
+/* Account */
+.account{
+    background: white;
+    color: black;
+    position: relative;
+}
+
+.account-container {
+    background: white;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 100px;
+}
+
+.account-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 700px;
+}
+
+.account-container h1 {
+    font-size: 50px;
+}
+
+.account-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 50px;
+}
+
+.account-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.account-content img {
+    margin-right: 50px;
+    max-width: 10%;
+    height: auto;
+}
+
+.account-desc h2 {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.account-desc p {
+    line-height: 2;
+}
+
+@media screen and (max-width: 768px) {
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .account-container {
+        padding: 100px;
+        padding-bottom: 160px;
+        padding-left: 16px;
+    }
+
+    .account-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 900px;
+    }
+
+    .account-container h1 {
+        text-align: center;
+        margin-bottom: 160px;
+    }
+
+    .account-left {
+        padding: 0 24px;
+
+    }
+    
+    .account-content {
+        margin-top: 40px;
+    }
+
+    .account-content img {
+        margin-right: 16px;
+    }
+
+}
+
