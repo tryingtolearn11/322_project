@@ -105,30 +105,53 @@ def instructor_classes():
         if len(current_classes) == 0:
             current_classes = 0
 
-
-
+    # If User is Instructor
+    if isinstance(current_user, Instructor):
+        current_classes = current_user.current_classes
+        if len(current_classes) == 0:
+            current_classes = 0
+    print(current_classes)
 
     return render_template('instructor_classes.html', title='Classes', current_classes=current_classes)
 
 # --------------------------------------------------------------------
 
 
-@app.route('/courses/<string:courseID>')
+@app.route('/courses/<string:courseID>', methods=['GET', 'POST'])
 @login_required
 def course_page(courseID):
     course = Course.get(courseID)
     print(course.class_list)
     class_list = course.class_list
+
     return render_template('course_page.html',
                            title="{}".format(course.courseName),
                            class_list=class_list)
 
+
+@app.route('/courses/<string:courseID>/<string:studentUsername>/assignGrade', methods=['GET', 'POST'])
+@login_required
+def assignGrade(studentUsername, courseID):
+    data = request.form['text']
+    print(data)
+    student = User.get(studentUsername)
+    course = Course.get(courseID)
+    student.addGrade(data.upper(), course)
+
+    return redirect(url_for('course_page', courseID=courseID))
+    
+
+    
+    
 
 
 @app.route('/students/<string:studentUsername>')
 @login_required
 def student_page(studentUsername):
     student = User.get(studentUsername)
+    gpa = student.evaluateGPA()
+    if gpa == None:
+        flash("GPA unavailable")
     return render_template('student_page.html', student=student)
 
 # Home Page 

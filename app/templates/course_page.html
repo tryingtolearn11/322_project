@@ -29,8 +29,24 @@
                 <tr>
                     <td><a href="{{url_for('student_page', studentUsername=s.username) }}">{{ s.student_id }}</a></td>
                     <td><a href="{{url_for('student_page', studentUsername=s.username) }}">{{ s.username }}</a></td>
-                    <td><input value="" type="text" placeholder="Enter Grade"></td>
+                    <td>
+                        {% if k.courseID in s.currentClasses %}
+                            <form method="POST" action="{{url_for('assignGrade',studentUsername=s.username,courseID=k.courseID)}}">
+                                <input name="text">
+                                <input type="submit">
+                            </form>
+                        {% endif %}
+                    </td>
                     <td><button type="button" class="btn btn-primary">submit</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tbody>
+                {% for p in k.passedStudents %}
+                <tr>
+                    <td><a href="{{url_for('student_page', studentUsername=p.username) }}">{{ p.student_id }}</a></td>
+                    <td><a href="{{url_for('student_page',studentUsername=p.username) }}">{{ p.username }}</a></td>
+                    <td>{{ p.grades[k.courseID][0] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -9,5 +9,6 @@ app.config.from_object(Config)
 login = LoginManager(app)
 login.login_view = 'login'
 
+app.jinja_env.filters['zip'] = zip
 
 from app import routes
