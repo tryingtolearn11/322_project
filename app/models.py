@@ -273,12 +273,12 @@ def load_user(user):
 
 
 class Course:
-    def __init__(self, courseID, courseName, credits, year, professorID, avg_rating, time, room, status):
+    def __init__(self, courseID, courseName, credits, year, professorName, avg_rating, time, room, status):
         self.courseID = courseID
         self.courseName = courseName
         self.credits = credits
         self.year = year
-        self.professorID = professorID
+        self.professorName = professorName
         self.avg_rating = avg_rating
         self.time = time
         self.room = room
@@ -383,11 +383,11 @@ registered_users_table = [
 ]
 
 registered_courses_table = [
-    Course("1A", "Software", "3", "2021", "100", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
-    Course("2A", "Data Structures", "3", "2021", "100", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
-    Course("3A", "Algorithms", "3", "2021", "100", "1", "11:00 am - 12:15 pm", "NAC 2/204", "Closed"),
-    Course("4A", "Statistics", "3", "2021", "100", "4", "9:00 am - 11:15 am", "ONLINE", "Closed"),
-    Course("5A", "Operating System", "4", "2021", "100", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open"),]
+    Course("1A", "Software", "3", "2021", "john", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
+    Course("2A", "Data Structures", "3", "2021", "john", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
+    Course("3A", "Algorithms", "3", "2021", "john", "1", "11:00 am - 12:15 pm", "NAC 2/204", "Closed"),
+    Course("4A", "Statistics", "3", "2021", "mary", "4", "9:00 am - 11:15 am", "ONLINE", "Closed"),
+    Course("5A", "Operating System", "4", "2021", "hank", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open"),]
 
 
 
