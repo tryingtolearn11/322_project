@@ -7,27 +7,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage</title>
+    <h1>Course Page</h1>
 </head>
 <body>
-    <div class="course_container">
-        <h1>Course Page</h1>
-        <div class="row">
-            <div class="col-md-4">
-                <ul>
-                    {% if current_user.access == 3 %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('class_setup') }}"id="last_nav_link">Class-Setup</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('course_registration') }}"id="last_nav_link">Course Registration</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('grading_period')}}"id="last_nav_link">Grading</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
+
+    <div class="course">
+        <div class="table-responsive">
+            
+        </div>
+        <div class="course-container">
+            <h1>Course Page</h1>
+            <div class="course-grid">
+                {% if current_user.access == 3 %}
+                
+                <div class="course-left">
+                    <div class="course-content">
+                        <img src="static/img/presentation.png" alt="setup">
+                        <div class="course-desc">
+                            <h2 class="nav-item"><a class="nav-link" href="{{ url_for('class_setup') }}"id="last_nav_link">Class-Setup</a></h2>
+                            <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p> -->
+                        </div>
+                    </div>
+                
+                    <div class="course-content">
+                        <img src="static/img/web.png" alt="register">
+                        <div class="course-desc">
+                            <h2 class="nav-item"><a class="nav-link" href="{{ url_for('course_registration') }}"id="last_nav_link">Course Registration</a></h2>
+                            <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p> -->
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <img src="static/img/grades.png" alt="grades">
+                        <div class="course-desc">
+                            <h2 class="nav-item"><a class="nav-link" href="{{ url_for('grading_period')}}"id="last_nav_link">Grading</a></h2>
+                            <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p> -->
+                        </div>
+                    </div>
+
+                    <div class="course-content">
+                        <img src="static/img/classroom.png" alt="class">
+                        <div class="course-desc">
+                            <h2 class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></h2>
+                            <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p> -->
+                        </div>
+                    </div>
+
                     {% elif current_user.access >= 2 %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></li>
+                    <div class="course-content">
+                        <img src="static/img/classroom.png" alt="class">
+                        <div class="course-desc">
+                            <h2 class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></h2>
+                            <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam consectetur dolores, incidunt veritatis officiis consequuntur.</p> -->
+                        </div>
+                    </div>
                     {% endif %}
 
-                </ul>
+                    
+                </div>
+                <div class="course-right">
+                    <img src="static/img/manage.svg" alt="manage" class="manage"/>
+
+
+                </div>
             </div>
         </div>
     </div>
+
+
 </body>
 </html>
 {% endblock %}
