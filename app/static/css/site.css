@@ -390,13 +390,18 @@
     width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 630px) {
     .account-grid {
         grid-template-columns: 1fr;
     }
 
     .study {
         display: none;
+    }
+
+    .account-content img {
+        max-width: 45%;
+        height: auto;
     }
 }
 
@@ -414,7 +419,7 @@
 
     .account-container h1 {
         text-align: center;
-        margin-bottom: 160px;
+        margin-bottom: 10px;
     }
 
     .account-left {
@@ -428,6 +433,7 @@
 
     .account-content img {
         margin-right: 16px;
+        
     }
 
 }
@@ -499,6 +505,13 @@
     .manage {
         display: none;
     }
+
+    .course-content img {
+        max-width: 50%;
+        height: auto;
+    }
+
+
 }
 
 @media screen and (max-width: 460px) {
@@ -515,7 +528,8 @@
 
     .course-container h1 {
         text-align: center;
-        margin-bottom: 160px;
+        margin-bottom: 10px;
+        
     }
 
     .course-left {
@@ -529,6 +543,8 @@
 
     .course-content img {
         margin-right: 16px;
+        
+        
     }
 
 }
