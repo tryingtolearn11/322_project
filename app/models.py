@@ -231,8 +231,11 @@ class Student(User):
             self.suspended = True
             print("Student Will be suspended")
 
-    def addClass(self, courseID, course, credits, year):
-        self.currentClasses[courseID] = ["N/A", course, credits, year]
+    def addClass(self, class1):
+        self.currentClasses[class1.courseName] = {class1.courseID,
+                                                  class1.courseName,
+                                                  class1.credits,
+                                                  class1.year}
 
     def dropClass(self, courseID):
         try:
@@ -298,14 +301,18 @@ class CourseClass(Course):
         self.instructor = None
         self.courseID = None
         self.courseName = None
+        self.credits = None
+        self.year = None
 
     def setCourseID(self, courseID):
         course = Course.get(courseID)
         if course in registered_courses_table:
-            print("found")
-            print(course)
+            #print("found")
+            #print(course)
             self.courseID = course.courseID
             self.courseName = course.courseName
+            self.credits = course.credits
+            self.year = course.year
         else:
             print("Course ID Not Found")
 
@@ -321,6 +328,15 @@ class CourseClass(Course):
     def checkClassStatus(self):
         if len(self.roster) < 5:
             self.cancelled = True
+
+    def assignInstructor(self, instructor):
+        self.instructor = instructor
+        instructor.current_classes[self.classID] = {self.courseID,
+                                                   self.courseName,
+                                                   self.credits,
+                                                   self.year}
+
+
 
     @classmethod
     def get(cls, courseID):
@@ -342,6 +358,7 @@ class CourseClass(Course):
 registered_users_table = [
     User("susan", 'cat'), # Registrars
     Instructor("john", 'dog'), # Instructor
+    Instructor("mary", 'bad'),
     Student("tom",'fish'),
     Student("max",'mouse'),
     Student("jax",'rat'),
@@ -372,6 +389,7 @@ c1.setCourseID("1A")
 c1.addStudent(User.get("max"))
 c1.addStudent(User.get("jax"))
 c1.addStudent(User.get("sofia"))
+c1.assignInstructor(User.get("john"))
 
 
 
@@ -380,6 +398,7 @@ c2.setCourseID("2A")
 c2.addStudent(User.get("max"))
 c2.addStudent(User.get("jax"))
 c2.addStudent(User.get("sofia"))
+c1.assignInstructor(User.get("mary"))
 
 c3 = CourseClass()
 c3.setCourseID("3A")
@@ -392,7 +411,7 @@ c3.setCourseID("3A")
 
 registered_classes_table = [c1, c2, c3]
 
-
+Max = User.get("max")
 
 
 
@@ -411,11 +430,9 @@ Tom.addGrade("A+", Course.get("4A"))
 Tom.addGrade("A", Course.get("5A"))
 
 # Current classes
-Tom.addClass("1", "www", "4", "2021")
-Tom.addClass("3", "yyy", "3", "2021")
-Tom.addClass("4", "xxx", "4", "2021")
-Tom.addClass("2", "zzz", "3", "2021")
-Tom.addClass("5", "aaa", "4", "2021")
+Tom.addClass(CourseClass.get("1A"))
+Tom.addClass(CourseClass.get("2A"))
+Tom.addClass(CourseClass.get("3A"))
 Tom.evaluateGPA()
 
 

@@ -1,5 +1,5 @@
 from app import app
-from app.models import User,registered_users_table,Student,generateDummyStudent, Course, registered_courses_table, CourseClass, Instructor, generateDummyInstructor
+from app.models import User,registered_users_table,Student,generateDummyStudent, Course,registered_courses_table, CourseClass, Instructor, generateDummyInstructor,registered_classes_table
 
 @app.shell_context_processor
 def make_shell_context():
@@ -7,7 +7,8 @@ def make_shell_context():
             'Student' : Student, 'generateDummyStudent': generateDummyStudent,
             'Course' : Course, 'registered_courses_table': registered_courses_table, 
             'CourseClass': CourseClass, 'Instructor': Instructor,
-            'generateDummyInstructor': generateDummyInstructor}
+            'generateDummyInstructor': generateDummyInstructor,
+            'registered_classes_table': registered_classes_table}
 
 
 
