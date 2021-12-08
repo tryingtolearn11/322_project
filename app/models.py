@@ -423,6 +423,23 @@ registered_users_table = [
     Student("katy", "wenis")
 ]
 
+
+
+all_registrars = [
+    User("susan", 'cat'),
+    User("josh", "miranda"),
+    User("jinx", 'arcane')]
+
+
+
+
+
+
+
+
+
+
+
 registered_courses_table = [
     Course("1A", "Software", "3", "2021", "john", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
     Course("1B", "Software", "3", "2021", "mary", "5", "11:00 am - 2:15 pm", "ONLINE", "Open"),

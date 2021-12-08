@@ -140,19 +140,22 @@ def manage_course():
 @login_required
 @requires_access_level(ACCESS['student'])
 def instructor_classes():
+    current_classes = 0
     # Show current classes if User is student
     if isinstance(current_user, Student):
-        current_classes = current_user.currentClasses
-        if len(current_classes) == 0:
-            current_classes = 0
+        if len(current_classes) != 0:
+            current_classes = current_user.currentClasses
 
     # If User is Instructor
     if isinstance(current_user, Instructor):
-        current_classes = current_user.current_classes
-        if len(current_classes) == 0:
-            current_classes = 0
-    print(current_classes)
+        if len(current_classes) != 0:
+            current_classes = current_user.current_classes
 
+    if isinstance(current_user, User) and current_user in all_registrars:
+        flash("You have no classes")
+        return redirect(url_for('manage_course'))
+
+    print(current_classes)
     return render_template('instructor_classes.html', title='Classes', current_classes=current_classes)
 
 # --------------------------------------------------------------------
