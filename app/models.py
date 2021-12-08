@@ -321,6 +321,10 @@ class CourseClass(Course):
     # quick hack version of addStudent
     def addStudent(self, student):
         self.roster.append(student)
+        student.currentClasses[self.classID] = {self.courseID,
+                                                self.courseName,
+                                                self.credits,
+                                                self.year}
 
     def removeStudent(self, student):
         self.roster.pop(student)
@@ -359,10 +363,14 @@ registered_users_table = [
     User("susan", 'cat'), # Registrars
     Instructor("john", 'dog'), # Instructor
     Instructor("mary", 'bad'),
+    Instructor("hank",'bird'),
     Student("tom",'fish'),
     Student("max",'mouse'),
     Student("jax",'rat'),
     Student("sofia",'snake'),
+    Student("damien",'singh'),
+    Student("bill", 'monkey'),
+    Student("frank",'night')
 ]
 
 registered_courses_table = [
