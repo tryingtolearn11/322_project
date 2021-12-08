@@ -423,18 +423,27 @@ registered_users_table = [
     Student("katy", "wenis")
 ]
 
-
-
 all_registrars = [
     User("susan", 'cat'),
     User("josh", "miranda"),
     User("jinx", 'arcane')]
 
+all_instructors = [
+    Instructor("john", 'dog'),
+    Instructor("mary", 'bad'),
+    Instructor("hank",'bird'),
+    Instructor("bob", 'duncan'),
+    Instructor("julia", 'twitch')]
 
-
-
-
-
+all_students = [
+    Student("tom",'fish'),
+    Student("max",'mouse'),
+    Student("jax",'rat'),
+    Student("sofia",'snake'),
+    Student("damien",'singh'),
+    Student("bill", 'monkey'),
+    Student("frank",'night'),
+    Student("katy", "wenis")]
 
 
 
@@ -507,11 +516,6 @@ Max = User.get("max")
 
 
 
-
-
-
-
-
 Tom = User.get("tom")
 Tom.addGrade("A", Course.get("1A"))
 Tom.addGrade("B+", Course.get("2A"))
@@ -524,43 +528,4 @@ Tom.addClass(CourseClass.get("1A"))
 Tom.addClass(CourseClass.get("2A"))
 Tom.addClass(CourseClass.get("3A"))
 Tom.evaluateGPA()
-
-
-
-
-
-
-def generateDummyStudent():
-    s = Student("damien", "singh")
-
-
-    '''
-    s.addGrade("a", "C+", "swe", "3", "2021")
-    s.addGrade("b", "A+", "sw", "4", "2021")
-    s.addGrade("c", "A-", "sw", "4", "2021")
-    s.addGrade("d", "B-", "sw", "4", "2021")
-    s.addGrade("e", "A-", "sw", "3", "2021")
-    s.addGrade("f", "A-", "sw", "3", "2021")
-    s.addGrade("g", "B", "sw", "3", "2021")
-    '''
-
-    # Current classes
-
-    s.addClass("1", "www", "4", "2021")
-    s.addClass("3", "yyy", "3", "2021")
-    s.addClass("4", "xxx", "4", "2021")
-    s.addClass("2", "zzz", "3", "2021")
-    s.addClass("5", "aaa", "4", "2021")
-    
-    s.dropClass("5")
-    s.applyForGraduation()
-    return s
-
-
-def generateDummyInstructor():
-    john = Instructor.get("john")
-    john.addClass("1A")
-    john.addClass("5A")
-    return john
-
 

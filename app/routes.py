@@ -16,10 +16,6 @@ from werkzeug.urls import url_parse
     
 *** Keep ONLY those types of functions in here
 '''
-
-
-
-
 # --------------- Periods ----------------------------------------
 
 # Class Set-up Period
@@ -38,11 +34,13 @@ def requires_access_level(access_level):
                 return redirect(url_for('login'))
 
             user = User.get(session.get('username'))
-            if session['username'] == "susan":
-                user.set_registrar()
+            for u in all_registrars:
+                if session['username'] == u.username:
+                    user.set_registrar()
 
-            if session['username'] == "john":
-                user.set_instructor()
+            for i in all_instructors:
+                if session['username'] == i.username:
+                    user.set_instructor()
 
             flash(user.access)
             if not user.allowed(access_level):
@@ -229,9 +227,14 @@ def login():
                 session['user_index'] = user_index
                 session['email'] = user.email
     
-                # Dummy Data
-                if session['username'] == "susan":
-                    user.set_registrar()
+                for u in all_registrars:
+                    if session['username'] == u.username:
+                        user.set_registrar()
+
+                for u in all_instructors:
+                    if session['username'] == u.username:
+                        user.set_instructor()
+
                 if session['username'] == "john":
                     user.set_instructor()
 
