@@ -38,21 +38,16 @@
                         <tr>
                             <td><a href="{{url_for('course_page_registration', courseID=course.courseID)}}">{{ course.courseName }}</td>
                             <td>{{ course.courseID }}</td>
-                            <td>{{ course.professorName }}</td>
+                            <td>{{ course.professorID }}</td>
                             <td>{{ course.time }}</td>
                             <td>{{ course.room }}</td>
                             <td>{{ course.status }}</td>
-                            <td><button type="button" class="btn btn-default">
-                                    <a href="{{ url_for('register_class')}}">Shopping Cart</a></button></td>
+                            <td><button type="button" class="btn btn-primary">
+                                    <a href="{{ url_for('register_class')}}">register</a></button></td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <center>
-                    <button type="button" class="btn btn-success">
-                        <a href="index" class="link-dark">Register</a>
-                    </button>
-                </center>>
                 </div>
             </div>
         </div>
