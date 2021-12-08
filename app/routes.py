@@ -65,11 +65,38 @@ def class_setup():
 @login_required
 @requires_access_level(ACCESS['student'])
 def course_registration():
-    courses = registered_courses_table
+    courses = registered_courses_table_nextSemester
     return render_template('course_registration.html', title='Course Registration', courses=courses)
-    # database=DB()
-    # classes = database.getClasses()
-    # return render_template('course_registration.html', classes=classes, title='Course Registration')
+
+
+@app.route('/course-registration/<string:courseID>')
+@login_required
+@requires_access_level(ACCESS['student'])
+def course_page_registration(courseID):
+    course = Course.get(courseID)
+    class_list = course.class_list
+    print(class_list)
+    if class_list == None:
+        flash("No classes available")
+        return redirect(url_for('course_registration'))
+
+    return render_template('course_page_registration.html',
+                           title="{}".format(course.courseName),
+                           class_list=class_list)
+
+
+
+
+@app.route('/course-registration/<string:courseID>/')
+def addToCart(courseID):
+    if isinstance(current_user, Student):
+        current_user.addToShoppingCart(courseID)
+        return redirect(url_for('course_registration'))
+    else:
+        flash("User is Not a Student")
+    
+
+
 
 
 @app.route('/grading')
