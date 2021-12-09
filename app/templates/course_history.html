@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+{% if current_user.access == 1 %}
+<h3> Current GPA : {{current_user.overallGPA }}</h3>
+{% endif %}
+
 <body>
     <h1><center>Course History</center></h1>
     <div class="col-lg-12">

@@ -285,14 +285,16 @@ class Student(User):
 
     def dropClass(self, courseID):
         try:
-            course = self.currentClasses[courseID] 
-            self.currentClasses.pop(courseID)
+            course = Course.get(courseID)
+            self.currentClasses.pop(course.courseName, None)
+            print(self.currentClasses)
             self.droppedCourses[courseID] = ["W", course]
             if len(self.currentClasses) == 0:
                 self.addWarnings(3)
+                print("Student has dropped all courses")
 
         except KeyError as ex:
-            print("No such Course: '%s'" % ex.message)
+            print("No such Course")
 
     
     def __repr__(self):
