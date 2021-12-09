@@ -63,7 +63,16 @@ Here is our second phase report:
 - database.py - This is where the functions using the database will be stored in eg. sorting functions
 - All the html stuff is for each page 
 
-#Requirements
+#Create Virtual Environment from Python3
 
    	- Need to have pip installed
-    - pip install -r requirements.txt  //install all packages needed
+	- $ python3 -m venv venv
+	- $ source venv/bin/activate
+
+#Requirements
+
+    - $ pip install -r requirements.txt  //install all packages needed
+
+#Run the Program
+	
+	- $ flask run
