@@ -468,11 +468,11 @@ registered_courses_table = [
 
 
 registered_courses_table_nextSemester = [
-        Course("1B", "Software", "3", "2022", "john", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
-        Course("2B", "Data Structures", "3", "2022", "mary", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
-        Course("3B", "Algorithms", "3", "2022", "hank", "1", "11:00am - 12:15 pm", "NAC 2/204", "Closed"),
-        Course("4B", "Statistics", "3", "2022", "bob","4", "9:00 am - 11:15 am", "ONLINE","Closed"),
-        Course("5B", "Operating System", "4", "julia", "100", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open")]
+        Course("1B", "Software", "3", "2022", "100", "5", "9:00 am - 10:15 am", "NAC 1/103", "Open"),
+        Course("2B", "Data Structures", "3", "2022", "100", "2", "10:00 am - 11:15 am", "NAC 2/203", "Open"),
+        Course("3B", "Algorithms", "3", "2022", "100", "1", "11:00am - 12:15 pm", "NAC 2/204", "Closed"),
+        Course("4B", "Statistics", "3", "2022", "100","4", "9:00 am - 11:15 am", "ONLINE","Closed"),
+        Course("5B", "Operating System", "4", "2022", "100", "1", "8:00 am - 10:15 am", "NAC 1/115", "Open")]
 
 
 
