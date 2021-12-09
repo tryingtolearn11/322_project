@@ -285,9 +285,9 @@ class Student(User):
 
     def dropClass(self, courseID):
         try:
-            course_info = self.currentClasses[courseID] 
+            course = self.currentClasses[courseID] 
             self.currentClasses.pop(courseID)
-            self.droppedCourses[courseID] = ["W", course_info[1], course_info[2], course_info[3]]
+            self.droppedCourses[courseID] = ["W", course]
             if len(self.currentClasses) == 0:
                 self.addWarnings(3)
 
