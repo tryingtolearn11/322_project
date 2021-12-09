@@ -21,53 +21,75 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div class="h4 card-title text-success"> Computer Science Courses </div>
-                <table class="table table-bordered">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Course Name</th>
-                            <th>Section</th>
-                            <th>Professor</th>
-                            <th>Time</th>
-                            <th>Room</th>
-                            <th>Availability</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for course in courses %}
-                        <tr>
-                            <td><a href="{{url_for('course_page_registration', courseID=course.courseID)}}">{{ course.courseName }}</td>
-                            <td>{{ course.courseID }}</td>
-                            <td>{{ course.time }}</td>
-                            <td>{{ course.room }}</td>
-                            <td>{{ course.status }}</td>
-                            <td><button type="button" class="btn btn-default">
-                                    <a href="{{ url_for('register_class')}}">register</a></button></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    <table class="table table-striped table-bordered">
+                        <thead class="text-center thead-dark">
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Section</th>
+                                <th>Time</th>
+                                <th>Room</th>
+                                <th>Availability</th>
+                                <th>Register</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                            <tr>
+                                <td>{{ course.courseName }}</td>
+                                <td>{{ course.courseID }}</td>
+                                <td>{{ course.time }}</td>
+                                <td>{{ course.room }}</td>
+                                <td>{{ course.status }}</td>
+                                <td><button type="button" class="btn btn-default">
+                                    <a href="{{url_for('course_page_registration', courseID=course.courseID)}}">More Details</a></button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="h4 text-dark">Currently in Cart:</div>
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Class ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if cart != 0 %}
+                            {% for c in cart %}
+                            <tr>
+                                <td>{{ c.courseName }}</td>
+                                <td>{{ c.classID }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <td><button type="button" class="btn btn-default">
+                        <a href="{{ url_for('register_class')}}">register</a>
+                    </button></td>
+                    
+                    <div class="h4 text-dark">Next Semester Classes:</div>
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Class ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for c in student.registered_next_semester %}
+                            <tr>
+                                <td>{{ c.courseName }}</td>
+                                <td>{{ c.classID }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
-    <div>
-        <h3>Currently in Cart:</h3>
-        {% if cart != 0 %}
-            {% for c in cart %}
-            <li> {{ c.courseName }}, {{ c.classID }}</li>
-            {% endfor %}
-        {% endif %}
-
-        <td><button type="button" class="btn btn-default">
-                <a href="{{ url_for('register_class')}}">register</a></button></td>
-
-        <h3>Next Semester Classes:</h3>
-        {% for c in student.registered_next_semester %}
-        <li> {{c.classID }}, {{ c.courseName }} </li>
-        {% endfor %}
-    </div>
-        
-        
+    </div>      
 </body>
 </html>
     
