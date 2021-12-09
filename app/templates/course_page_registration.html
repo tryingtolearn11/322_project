@@ -10,19 +10,39 @@
     <title>Document</title>
 </head>
 <body>
-{% if class_list == None %}
-<h3> No Classes Available </h3>
-{% else %}
-{% for c in class_list %}
-<li> Class ID : {{ c.classID }}</li>
-<li> Course ID : {{ c.courseID }}</li>
-<li> Class seats : {{ c.seatsNextSemester }}</li>
-<button type="button" class="btn btn-primary"> <a href="{{
-        url_for('addToCart', courseID=c.courseID)}}">Add to Shopping Cart</a></button>
-<button type="button" class="btn btn-danger"> <a href="{{
-        url_for('removeFromCart', courseID=c.courseID)}}">Remove from Shopping Cart</a></button>
-{% endfor %}
-{% endif %}
+    <div class="h4 text-primary text-center">Course Page Registration</div>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Class ID</th>
+                            <th>Course ID</th>
+                            <th>Class Seats</th>
+                            <th>Add to Shopping Cart</th>
+                            <th>Remove from Shopping Cart</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if class_list == None %}
+                        <h3> No Classes Available </h3>
+                        {% else %}
+                        {% for c in class_list %}
+                        <tr>
+                            <td>{{ c.classID }}</td>
+                            <td>{{ c.courseID }}</td>
+                            <td>{{ c.seatsNextSemester }}</td>
+                            <td><button type="button" class="btn btn-success"> <a href="{{url_for('addToCart', courseID=c.courseID)}}">Add to Shopping Cart</a></button></td>
+                            <td><button type="button" class="btn btn-danger"> <a href="{{url_for('removeFromCart', courseID=c.courseID)}}">Remove from Shopping Cart</a></button></td>
+                        </tr>                        
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 {% endblock %}
