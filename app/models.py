@@ -526,6 +526,9 @@ Tom.addGrade("B+", Course.get("2A"))
 Tom.addGrade("C-", Course.get("3A"))
 Tom.addGrade("A+", Course.get("4A"))
 Tom.addGrade("A", Course.get("5A"))
+Tom.addGrade("B", Course.get("6A"))
+Tom.addGrade("A+", Course.get("7A"))
+Tom.addGrade("B-", Course.get("8A"))
 
 # Current classes
 Tom.addClass(CourseClass.get("1A"))
