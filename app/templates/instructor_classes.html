@@ -42,6 +42,8 @@
                         <th>Year</th>
                     </tr>
                 </tfoot>
+
+            {% if current_user.access == 1 %}
             </table><div class="table-responsive">
                 <h1><center>Your Grades</center></h1>
             </div>
@@ -81,6 +83,7 @@
                         <th>Grades</th>
                     </tr>
                 </tfoot>
+        {% endif %}
             </table>
         </div>
         
