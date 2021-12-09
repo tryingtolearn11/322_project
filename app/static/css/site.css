@@ -554,4 +554,12 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-  }
+}
+
+/* center an image */
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
