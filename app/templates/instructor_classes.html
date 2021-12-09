@@ -54,13 +54,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for k, v in current_classes.items() %}
                     <tr>
-                        {% for k, v in current_classes.items() %}
-                            <th>{{ v.courseID }}</th>
-                            <td>{{ v.courseName }}</td>
-                            <td>{{ v.grades }}</td>
-                            <!-- TODO fix grade column  -->
-                            
+                        <th>{{ v.courseID }}</th>
+                        <td>{{ v.courseName }}</td>
+                        <td>{{ v[0] }}</td>
+                        <!-- TODO fix grade column  --> 
                     </tr>
                     {% endfor %}
                 </tbody>
