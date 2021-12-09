@@ -56,9 +56,14 @@ Here is our second phase report:
    * |-- routes.py
 
 #Website Organization
-    - 
+-
+- form.py - This is where all the forms we created are stored in and called when needed
+- models.py - The mini database where data is created and stored
+- routes.py - This is where all the code for routes are stored in
+- database.py - This is where the functions using the database will be stored in eg. sorting functions
+- All the html stuff is for each page 
 
 #Requirements
 
-    - Need to have pip installed
+   	- Need to have pip installed
     - pip install -r requirements.txt  //install all packages needed
