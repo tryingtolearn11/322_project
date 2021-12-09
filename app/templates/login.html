@@ -28,8 +28,11 @@
             <p> {{ form.submit() }} </p>
             <div>
                 <p> New User?
-                    <a href="register">
-                        <input value="Register" type="button">
+                    <a href="{{ url_for('registerInstructor') }}">
+                        <input value="Register as an Instructor" type="button">
+                    </a>
+                    <a href="{{ url_for('registerStudent') }}">
+                        <input value="Register as a student" type="button">
                     </a>
                 </p>
             </div>

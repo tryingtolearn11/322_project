@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>Register</h1>
+    <div class="signin">
+        <h1>Register</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
@@ -45,7 +46,7 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-    
+    </div>
 </body>
 </html>
 {% endblock %}
