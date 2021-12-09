@@ -139,6 +139,7 @@ class Student(User):
     def __init__(self, *args, **kwargs):
         super(Student, self).__init__(*args, **kwargs)
         self.student_id = User.generate_ID(8)
+        self.oldGPA = None
         self.grades = {}
         self.droppedCourses = {}
         self.currentClasses = {}

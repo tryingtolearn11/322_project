@@ -1,6 +1,6 @@
 from app import app 
 from flask import render_template, url_for, redirect, flash, request, session
-from app.forms import LoginForm, ComplaintForm, RegistrationForm
+from app.forms import LoginForm, ComplaintForm, InstructorRegistrationForm, StudentRegistrationForm
 from app.functions.package import userInfo
 from app.models import *
 from app.database import DB
@@ -235,11 +235,7 @@ def login():
                     if session['username'] == u.username:
                         user.set_instructor()
 
-                if session['username'] == "john":
-                    user.set_instructor()
-
                 flash(user.access)
-
                 session['access'] = user.access
 
                 return redirect(url_for('index'))
@@ -264,13 +260,15 @@ def logout():
     return redirect(url_for('index'))
 
 
-# Register Page for Student
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
+# Register Page for Instructor
+@app.route("/register-instructor", methods=['GET', 'POST'])
+def registerInstructor():
+    form = InstructorRegistrationForm()
     if form.validate_on_submit():
-        user = User(form.username.data, form.password.data)
+        user = Instructor(form.username.data, form.password.data)
         user.set_email(form.email.data)
+        user.set_instructor()
+
 
         # If user is already registered
         if user in registered_users_table:
@@ -280,8 +278,34 @@ def register():
             registered_users_table.append(user)
 
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form) 
+    return render_template('registerInstructor.html', title='Register', form=form) 
 
+
+# Register Page for Student
+@app.route("/register-student", methods=['GET', 'POST'])
+def registerStudent():
+    form = StudentRegistrationForm()
+    if form.validate_on_submit():
+        if float(form.oldGPA.data) > 3.0:
+            user = Student(form.username.data, form.password.data)
+            user.set_email(form.email.data)
+        else:
+            user = User(form.username.data, form.password.data)
+            flash("Your application has been sent in and You will hear back soon")
+
+
+        # If user is already registered
+        if user in registered_users_table:
+            flash('Already Registered User. Please Login')
+        else:
+            if isinstance(user, Student):
+                flash('Congratulations, you are now registered as a Student')
+            else:
+                flash('Congratulations, you are now registered as a User')
+            registered_users_table.append(user)
+
+        return redirect(url_for('login'))
+    return render_template('registerStudent.html', title='Register', form=form) 
 
 # User Info Page
 @app.route("/account")

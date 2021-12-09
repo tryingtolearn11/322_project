@@ -10,14 +10,20 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign in')
 
+class StudentRegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(),EqualTo('password')])
+    oldGPA = StringField('Enter GPA - 4.0 Scale', validators=[DataRequired()])
+    submit = SubmitField('Register')
 
-class RegistrationForm(FlaskForm):
+class InstructorRegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired(),EqualTo('password')])
     submit = SubmitField('Register')
-
 
 class ComplaintForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
