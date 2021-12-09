@@ -1,25 +1,88 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h1><center>Your Classes</center></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+</head>
+<body>
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <h1><center>Your Classes</center></h1>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for k, v in current_classes.items() %}
+                            <th>{{ v.courseID }}</th>
+                            <td>{{ v.courseName }}</td>
+                            {% if current_user.access == 1 %}
+                                <td><button type="button" class="btn btn-default"><a
+                                        href="{{url_for('dropCurrentClass', courseID=v.courseID)}}">Drop Course</a></button></td>
+                            {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Year</th>
+                    </tr>
+                </tfoot>
+            </table><div class="table-responsive">
+                <h1><center>Your Grades</center></h1>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Grades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for k, v in current_classes.items() %}
+                            <th>{{ v.courseID }}</th>
+                            <td>{{ v.courseName }}</td>
+                            <td>{{ v.grades }}</td>
+                            <!-- TODO fix grade column  -->
+                            
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+                <tfoot>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Grades</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+    </div>
+    
 
-{% for k, v in current_classes.items() %}
-    <p>{{ v.courseID }}</p>
-    <p>{{ v.courseName }}</p>
-    {% if current_user.access == 1 %}
-        <button type="button" class="btn btn-default"><a
-                href="{{url_for('dropCurrentClass', courseID=v.courseID)}}">Drop Course</a></button>
-    {% endif %}
-{% endfor %}
-
-{% if current_user.access == 1 %}
-<h3> Dropped Courses : </h3>
-{% for k, v in current_user.droppedCourses.items() %}
-    <p>Grade : {{ v[0] }}</p>
-    <p>{{ v[1].courseID }}</p>
-    <p>{{ v[1].courseName}}</p>
-{% endfor %}
-
-{% endif %}
 
     
+
+
+ 
+</body>
+</html>
 {% endblock %}
