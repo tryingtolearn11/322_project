@@ -54,10 +54,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for k, v in current_classes.items() %}
+                    {% for k, v in current_user.droppedCourses.items() %}
                     <tr>
-                        <th>{{ v.courseID }}</th>
-                        <td>{{ v.courseName }}</td>
+                        <th>{{ v[1].courseID }}</th>
+                        <td>{{ v[1].courseName }}</td>
                         <td>{{ v[0] }}</td>
                         <!-- TODO fix grade column  --> 
                     </tr>
