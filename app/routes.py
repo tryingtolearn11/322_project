@@ -135,7 +135,6 @@ def manage_course():
 
 
 # Instructor Classes
-
 @app.route('/your-classes')
 @login_required
 @requires_access_level(ACCESS['student'])
@@ -337,6 +336,30 @@ def course_history():
 
     return render_template('course_history.html', title='Course History',
                            past_courses=past_courses)
+
+
+
+
+
+@app.route("/account/apply-for-grad")
+@login_required
+def applyForGrad():
+    grad_status = None
+    if isinstance(current_user, Student):
+        student = current_user
+        grad_status = current_user.applyForGraduation()
+    else:
+        flash("User is not a student -> Cannot Apply")
+        return redirect(url_for('account'))
+    return render_template('apply_for_grad.html', grad_status=grad_status,
+                           student=student)
+
+
+
+
+
+
+
 
 
 @app.route("/course_registration/register")

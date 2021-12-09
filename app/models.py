@@ -265,11 +265,13 @@ class Student(User):
     def applyForGraduation(self):
         self.evaluateGPA()
         if len(self.grades) >= 8 and self.overallGPA >= 2:
-            self.graduationStatus = True
             print("Student Eligible for Graduation!")
+            self.graduationStatus = True
         else:
             print("Reckless Graduation application")
             self.addWarnings(1)
+            self.graduationStatus = False
+        return self.graduationStatus
 
 
     def addWarnings(self, warningCount):
