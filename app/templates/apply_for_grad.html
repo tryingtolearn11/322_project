@@ -17,13 +17,14 @@
         <div class="table-responsive">
             <h1><center>GRADUATION PAGE</center></h1>
             {% if grad_status %}
-            <div class="thumbnail">
-                <img src="https://m.media-amazon.com/images/I/61knHr2ewOL._AC_SX355_.jpg" class="img-fluid center" alt="Confetti" style="width:100%">
-                <div class="caption">
-                    <h3><center> Congrats on your Completion!!! </center></h3>
+            <div class="col-lg-12">
+                <div class="thumbnail">
+                    <img src="https://m.media-amazon.com/images/I/61knHr2ewOL._AC_SX355_.jpg" class="img-fluid center" alt="Confetti" style="width:100%">
+                    <div class="caption">
+                        <h3><center> Congrats on your Completion!!! </center></h3>
+                    </div>
                 </div>
             </div>
-            
             {% else %}
             <h3><center>Reckless Graduation {{student.username}} has been warned!. Fee will be added.</center></h3>
             {% endif %}
