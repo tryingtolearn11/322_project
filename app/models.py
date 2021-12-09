@@ -178,6 +178,7 @@ class Student(User):
                 self.registered_next_semester.append(c)
                 c.seatsNextSemester += 1
                 c.enrolledNextSemester.append(self)
+            self.shoppingCart = []
 
     def addGrade(self, grade, course):
         self.grades[course.courseID] = [grade, course]

@@ -57,6 +57,14 @@
             <li> {{ c.courseName }}, {{ c.classID }}</li>
             {% endfor %}
         {% endif %}
+
+        <td><button type="button" class="btn btn-default">
+                <a href="{{ url_for('register_class')}}">register</a></button></td>
+
+        <h3>Next Semester Classes:</h3>
+        {% for c in student.registered_next_semester %}
+        <li> {{c.classID }}, {{ c.courseName }} </li>
+        {% endfor %}
     </div>
         
         

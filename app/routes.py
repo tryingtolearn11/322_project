@@ -66,11 +66,13 @@ def course_registration():
     courses = registered_courses_table_nextSemester
     cart = 0
     if isinstance(current_user, Student):
+        student = current_user
         cart = current_user.shoppingCart
-        if len(cart) == None:
+        if len(cart) == 0:
             cart = 0
             flash("Your Cart is empty")
-    return render_template('course_registration.html', title='Course Registration',courses=courses, cart=cart)
+    return render_template('course_registration.html', title='Course Registration',courses=courses, cart=cart,
+                           student=student)
 
 
 @app.route('/course-registration/<string:courseID>')
@@ -340,7 +342,12 @@ def course_history():
 @app.route("/course_registration/register")
 @login_required
 def register_class():
-    return render_template('register_class.html', title='Register for Class')
+    if isinstance(current_user, Student):
+        current_user.enrollCart()
+    else:
+        flash('Unable to Register for Courses : User is not a Student')
+    return redirect(url_for('course_registration'))
+   # return render_template('register_class.html', title='Register for Class')
 
 
 
@@ -371,6 +378,7 @@ def complaint():
         print('Recent Complaint: {}\n'.format(new_complaint.content))
         return redirect(url_for('index'))
     return render_template('complaint.html', title='Complaints', form=form)
+
 
 #Tutorial Page
 @app.route("/tutorial")
