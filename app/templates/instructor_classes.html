@@ -63,9 +63,13 @@
                         <!-- TODO fix grade column  --> 
                     </tr>
                     {% endfor %}
-                    
                     {% if current_user.warning >= 3 %}
-                        <h3> Student In Danger - Registrar will be notified</h3>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Student In Danger - Registrar will be notified</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
                     {% endif %}
                     {% endif %}
                 </tbody>
