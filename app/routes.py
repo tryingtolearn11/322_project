@@ -51,11 +51,47 @@ def requires_access_level(access_level):
     return decorator
 
 
-@app.route('/class-setup')
+# Make a class
+@app.route('/class-setup', methods=['GET', 'POST'])
 @login_required
 @requires_access_level(ACCESS['registrar'])
 def class_setup():
     return render_template('class_setup.html', title='Class Setup')
+
+
+
+
+
+@app.route('/class-setup/make-class', methods=['GET', 'POST'])
+@login_required
+def makeClass():
+    course_id = request.form.get("course_id")
+    course_name = request.form.get("course_name")
+    class_time = request.form.get("class_time")
+    class_room = request.form.get("class_room")
+    
+    print("{}, {}, {}, {}".format(course_id,
+                                      course_name,
+                                      class_time,
+                                      class_room))
+
+    if current_user.access == 3:
+        res = createCourse(course_id, course_name, class_time, class_room)
+        if res == None:
+            flash("Error Creating Class")
+            return redirect(url_for("manage_course"))
+    return redirect (url_for('class_setup'))
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -72,8 +108,9 @@ def course_registration():
         if len(cart) == 0:
             cart = 0
             flash("Your Cart is empty")
+
     else:
-        if student == 0:
+        if current_user.access == 2 and student == 0:
             flash('No Access : User is not a student')
             return redirect(url_for('manage_course'))
     return render_template('course_registration.html', title='Course Registration',courses=courses, cart=cart,

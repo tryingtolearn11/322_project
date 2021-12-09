@@ -20,23 +20,23 @@
                             <div class="h4 card-title text-primary">Make a Class</div>
                         <table class="table table-bordered">
                             <thead class="text-center thead-light">
-                                <th>Class</th>
+                                <th>Course ID</th>
+                                <th>Course Name</th>
                                 <th>Class Time</th>
-                                <th>Course Instructor</th>
-                                <th>Class Size</th>
+                                <th>Class Room</th>
                                 <th>Submit</th>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input value="" type="text" placeholder="Enter Class Name"></td>
-                                    <td><input value="" type="text" placeholder="Enter Class Time"></td>
-                                    <td><select>
-                                        <OPTION Value="john">John</OPTION>
-                                        <OPTION Value="mary">Mary</OPTION>
-                                        <OPTION Value="hank">Hank</OPTION>
-                                    </select></td>
-                                    <td><input value="" type="text" placeholder="Enter Class Size"></td>
-                                    <td><button type="button" class="btn btn-primary">submit</button></td>
+
+                                    <form method="POST" action="{{url_for('makeClass')}}">
+                                    <td><input name = "course_id" type="text" placeholder="Enter Course ID"></td>
+                                    <td><input name = "course_name" type="text" placeholder="Enter Course Name"></td>
+                                    <td><input name = "class_time" type="text" placeholder="Enter Class Time"></td>
+                                    <td><input name = "class_room" type="text" placeholder="Enter Class Room"></td>
+                                    <td><input name ="" type = "submit"></td>
+                                </form>
+
                                 </tr>
                             </tbody>
                         </table>

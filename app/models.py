@@ -405,6 +405,19 @@ class CourseClass(Course):
         return '<Class {}, {}>'.format(self.classID, self.courseName)
 
 
+def createCourse(courseID, courseName, classTime, classRoom):
+    if courseID == None or courseName == None:
+        return None
+    else:
+        new_course = Course(courseID, courseName, "3", "2021", "john", "5", classTime, classRoom, "Open")
+        registered_courses_table_nextSemester.append(new_course)
+        new_class = CourseClass()
+        new_class.setCourseID(courseID)
+        new_course.addClass(new_class)
+        registered_classes_table_nextSemester.append(new_class)
+        print("New Course {}".format(new_course))
+        print(registered_courses_table_nextSemester)
+        return 1
 
 
 
@@ -511,10 +524,21 @@ c1B = CourseClass()
 c1B.setCourseID("1B")
 Course.get("1B").addClass(c1B)
 
+c2B = CourseClass()
+c2B.setCourseID("2B")
+Course.get("2B").addClass(c2B)
+
+c3B = CourseClass()
+c3B.setCourseID("3B")
+Course.get("3B").addClass(c3B)
+
+c4B = CourseClass()
+c4B.setCourseID("4B")
+Course.get("4B").addClass(c4B)
 
 
 registered_classes_table = [c1, c2, c3]
-registered_classes_table_nextSemester = [c1B]
+registered_classes_table_nextSemester = [c1B, c2B, c3B, c4B]
 
 Max = User.get("max")
 
