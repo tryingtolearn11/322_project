@@ -64,7 +64,8 @@ def class_setup():
 @requires_access_level(ACCESS['student'])
 def course_registration():
     courses = registered_courses_table_nextSemester
-    cart = 0
+    cart = 0     
+    #TODO condition for instructor                                   
     if isinstance(current_user, Student):
         student = current_user
         cart = current_user.shoppingCart
