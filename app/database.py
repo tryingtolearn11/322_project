@@ -11,6 +11,8 @@ class DB:
             self.class_json = self.data["class"]
             self.students_grade = self.data["student_grade"]
             self.users = self.data["user"]
+            self.taboo_words = self.data["taboo_words"]
+            self.reviews = self.data["reviews"]
 
     def getTopRatedClass(self):
         self.class_json.sort(key=lambda x: x["avg_rating"],reverse=True)
@@ -34,6 +36,17 @@ class DB:
             t["name"] = user["fname"]+" "+user["lname"]
             t["classname"] = classname["class_name"]
         return self.students_grade[:5]
+
+    def getTabooWords(self):
+        return self.taboo_words
+
+    def insertReview(self,user_id,class_id,rating,review):
+        datafile = os.path.join(app.static_folder, 'data', 'data.json')
+        with open(datafile,"r") as f:
+            temp = json.load(f)
+        temp["reviews"].append({"user_id":user_id,"class_id":class_id,"rating":rating,"review":review})
+        with open(datafile,"w") as f:
+            json.dump(temp, f)
 
     # def getClasses(self):
     #     for t in self.class_json[:]:

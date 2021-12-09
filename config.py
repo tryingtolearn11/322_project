@@ -1,3 +1,4 @@
+from logging import DEBUG
 import os
 
 class Config(object):

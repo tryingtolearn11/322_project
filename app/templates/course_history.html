@@ -22,6 +22,7 @@
                                 <th>Grade</th>
                                 <th>Credits</th>
                                 <th>Year</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tr>
@@ -34,6 +35,7 @@
                                     <td>{{ info[0] }}</td>
                                     <td>{{ info[2] }}</td>
                                     <td>{{ info[3] }}</td>
+                                    <td><button class="btn btn-primary review" data-id="{{course_id}}" data-toggle="modal" data-target="#exampleModal">Review Class</button></td>
                             </tr>
                                 {% endfor %}
                             {% endif %}
@@ -44,7 +46,62 @@
         <!-- <div clas="table-responsive"> -->
             
         <!-- </div> -->
+        <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Send Review</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <select class="form-control" id="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Review</label>
+                        <textarea id="review" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="send-review">Send Review</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            review_for = "";
+            $(".review").click(function(){
+                review_for = $(this).data("id");
+            });
+            $("#send-review").click(function(){
+                rating = $("#rating").val();
+                review = $("#review").val();
+                data = { "review_for":review_for,"rating" : rating, "review" : review };
+                $.ajax({ 
+                    url : "/addreview",
+                    type: 'POST',
+                    data : data,
+                    success:function(data,status){
+                        alert(data.review+"\r\n"+"Inserted")
+                    }
+                });
+            })
+        });
+    </script>
 </body>
+
 </html>
 {% endblock %}
