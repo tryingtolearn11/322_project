@@ -6,38 +6,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/login.css">
     
 </head>
 <body>
-    <div class="signin">
-        <head>
-            <h1> Sign In </h1>
-        </head>
-
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }} <br>
-                {{ form.username(size=32) }}
-            </p>
-            <p>
-                {{ form.password.label }} <br>
-                {{ form.password(size=32) }}
-            </p>
-            <p> {{ form.remember_me() }} {{ form.remember_me.label }}</p>
-            <p> {{ form.submit() }} </p>
-            <div>
-                <p> New User?
-                    <a href="{{ url_for('registerInstructor') }}">
-                        <input value="Register as an Instructor" type="button">
-                    </a>
-                    <a href="{{ url_for('registerStudent') }}">
-                        <input value="Register as a student" type="button">
-                    </a>
+    <div class="col-lg-12">
+        <div class="signin">
+            <head>
+                <h1> Sign In </h1>
+            </head>
+    
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }} <br>
+                    {{ form.username(size=32) }}
                 </p>
-            </div>
-        </form>
+                <p>
+                    {{ form.password.label }} <br>
+                    {{ form.password(size=32) }}
+                </p>
+                <p> {{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <p> {{ form.submit() }} </p>
+                <div>
+                    <p> New User?
+                        <a href="{{ url_for('registerInstructor') }}">
+                            <input value="Register as an Instructor" type="button">
+                        </a>
+                        <a href="{{ url_for('registerStudent') }}">
+                            <input value="Register as a student" type="button">
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
     </div>
+    
 </body>
 </html>
 {% endblock %}

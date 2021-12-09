@@ -7,13 +7,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 </head>
 <body>
 
     <div class="course">
-        <div class="table-responsive">
-            
-        </div>
         <div class="course-container">
             <h1>Course Page</h1>
             <div class="course-grid">
@@ -52,11 +50,13 @@
                     </div>
 
                     {% elif current_user.access >= 2 %}
-                    <div class="course-content">
-                        <img src="static/img/classroom.png" alt="class">
-                        <div class="course-desc">
-                            <h2 class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></h2>
-                            <p>Access your classes</p>
+                    <div class="solo-container">
+                        <div class="course-content">
+                            <img src="static/img/classroom.png" alt="class">
+                            <div class="course-desc">
+                                <h2 class="nav-item"><a class="nav-link" href="{{ url_for('instructor_classes')}}"id="last_nav_link">Your Classes</a></h2>
+                                <p>Access your classes</p>
+                            </div>
                         </div>
                     </div>
                     {% endif %}

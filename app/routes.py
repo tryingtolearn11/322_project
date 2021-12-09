@@ -7,7 +7,7 @@ from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
 from functools import wraps
 from werkzeug.urls import url_parse
-
+from collections import Counter
 
 
 ''' All Handlers go here. For example: 
@@ -337,10 +337,6 @@ def course_history():
     return render_template('course_history.html', title='Course History',
                            past_courses=past_courses)
 
-
-
-
-
 @app.route("/account/apply-for-grad")
 @login_required
 def applyForGrad():
@@ -355,13 +351,6 @@ def applyForGrad():
                            student=student)
 
 
-
-
-
-
-
-
-
 @app.route("/course_registration/register")
 @login_required
 def register_class():
@@ -371,10 +360,6 @@ def register_class():
         flash('Unable to Register for Courses : User is not a Student')
     return redirect(url_for('course_registration'))
    # return render_template('register_class.html', title='Register for Class')
-
-
-
-
 
 
 # Course Page
@@ -408,3 +393,18 @@ def complaint():
 @login_required
 def tutorial():
     return render_template('tutorial.html', title='Tutorial')
+
+@app.route("/addreview",methods=["post"])
+@login_required
+def addReview():
+    database=DB()
+    review_for = request.form.get("review_for")
+    rating = request.form.get("rating")
+    review = request.form.get("review")
+    taboo_words = database.getTabooWords()
+    word_counter = Counter(review.split(" "))
+    for word in taboo_words:
+        review = review.replace(word,"***")
+    database.insertReview(session["user_index"],review_for,rating,review)
+    return {"Message":"Review Successfully Inserted","review":review}
+
