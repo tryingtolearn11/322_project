@@ -42,7 +42,7 @@ def requires_access_level(access_level):
                 if session['username'] == i.username:
                     user.set_instructor()
 
-            flash(user.access)
+            # flash(user.access)
             if not user.allowed(access_level):
                 flash("Sorry, you are not authorized to view")
                 return redirect(url_for('index', message="restricted access"))
@@ -287,7 +287,7 @@ def login():
                     if session['username'] == u.username:
                         user.set_instructor()
 
-                flash(user.access)
+                # flash(user.access)
                 session['access'] = user.access
 
                 return redirect(url_for('index'))
@@ -359,6 +359,7 @@ def registerStudent():
         return redirect(url_for('login'))
     return render_template('registerStudent.html', title='Register', form=form) 
 
+
 # User Info Page
 @app.route("/account")
 @login_required
@@ -378,8 +379,6 @@ def course_history():
         past_courses = current_user.grades
         current_user.evaluateGPA()
         print(current_user.grades)
-
-
     else:
         print("User is not a student")
         past_courses = 0
@@ -408,11 +407,6 @@ def applyForGrad():
 
 
 
-
-
-
-
-
 @app.route("/course_registration/register")
 @login_required
 def register_class():
@@ -421,7 +415,6 @@ def register_class():
     else:
         flash('Unable to Register for Courses : User is not a Student')
     return redirect(url_for('course_registration'))
-   # return render_template('register_class.html', title='Register for Class')
 
 
 
