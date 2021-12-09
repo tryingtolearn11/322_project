@@ -1,6 +1,6 @@
 from app import app 
 from flask import render_template, url_for, redirect, flash, request, session
-from app.forms import LoginForm, ComplaintForm, RegistrationForm
+from app.forms import LoginForm, ComplaintForm, InstructorRegistrationForm, StudentRegistrationForm
 from app.functions.package import userInfo
 from app.models import *
 from app.database import DB
@@ -16,10 +16,6 @@ from werkzeug.urls import url_parse
     
 *** Keep ONLY those types of functions in here
 '''
-
-
-
-
 # --------------- Periods ----------------------------------------
 
 # Class Set-up Period
@@ -38,11 +34,13 @@ def requires_access_level(access_level):
                 return redirect(url_for('login'))
 
             user = User.get(session.get('username'))
-            if session['username'] == "susan":
-                user.set_registrar()
+            for u in all_registrars:
+                if session['username'] == u.username:
+                    user.set_registrar()
 
-            if session['username'] == "john":
-                user.set_instructor()
+            for i in all_instructors:
+                if session['username'] == i.username:
+                    user.set_instructor()
 
             flash(user.access)
             if not user.allowed(access_level):
@@ -66,6 +64,7 @@ def class_setup():
 @requires_access_level(ACCESS['student'])
 def course_registration():
     courses = registered_courses_table_nextSemester
+    cart = 0
     if isinstance(current_user, Student):
         cart = current_user.shoppingCart
         if len(cart) == None:
@@ -99,6 +98,7 @@ def addToCart(courseID):
         return redirect(url_for('course_registration'))
     else:
         flash("User is Not a Student")
+        return redirect(url_for('course_registration'))
     
 
 @app.route('/course-registration/<string:courseID>/remove')
@@ -108,6 +108,7 @@ def removeFromCart(courseID):
         return redirect(url_for('course_registration'))
     else:
         flash("User is Not a Student")
+        return redirect(url_for('course_registration'))
 
 
 
@@ -117,9 +118,8 @@ def removeFromCart(courseID):
 def grading_period():
     if isinstance(current_user, Instructor):
         courses = current_user.current_classes
-        print(courses)
     else:
-        flash("To be fixed tommorw")
+        flash("You Have no Classes")
         return redirect(url_for('manage_course'))
     return render_template('grading.html', title='Grading', courses=courses)
 
@@ -138,19 +138,22 @@ def manage_course():
 @login_required
 @requires_access_level(ACCESS['student'])
 def instructor_classes():
+    current_classes = 0
     # Show current classes if User is student
     if isinstance(current_user, Student):
-        current_classes = current_user.currentClasses
-        if len(current_classes) == 0:
-            current_classes = 0
+        if len(current_classes) != 0:
+            current_classes = current_user.currentClasses
 
     # If User is Instructor
     if isinstance(current_user, Instructor):
-        current_classes = current_user.current_classes
-        if len(current_classes) == 0:
-            current_classes = 0
-    print(current_classes)
+        if len(current_classes) != 0:
+            current_classes = current_user.current_classes
 
+    if isinstance(current_user, User) and current_user in all_registrars:
+        flash("You have no classes")
+        return redirect(url_for('manage_course'))
+
+    print(current_classes)
     return render_template('instructor_classes.html', title='Classes', current_classes=current_classes)
 
 # --------------------------------------------------------------------
@@ -224,14 +227,15 @@ def login():
                 session['user_index'] = user_index
                 session['email'] = user.email
     
-                # Dummy Data
-                if session['username'] == "susan":
-                    user.set_registrar()
-                if session['username'] == "john":
-                    user.set_instructor()
+                for u in all_registrars:
+                    if session['username'] == u.username:
+                        user.set_registrar()
+
+                for u in all_instructors:
+                    if session['username'] == u.username:
+                        user.set_instructor()
 
                 flash(user.access)
-
                 session['access'] = user.access
 
                 return redirect(url_for('index'))
@@ -256,13 +260,15 @@ def logout():
     return redirect(url_for('index'))
 
 
-# Register Page for Student
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
+# Register Page for Instructor
+@app.route("/register-instructor", methods=['GET', 'POST'])
+def registerInstructor():
+    form = InstructorRegistrationForm()
     if form.validate_on_submit():
-        user = User(form.username.data, form.password.data)
+        user = Instructor(form.username.data, form.password.data)
         user.set_email(form.email.data)
+        user.set_instructor()
+
 
         # If user is already registered
         if user in registered_users_table:
@@ -272,8 +278,34 @@ def register():
             registered_users_table.append(user)
 
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form) 
+    return render_template('registerInstructor.html', title='Register', form=form) 
 
+
+# Register Page for Student
+@app.route("/register-student", methods=['GET', 'POST'])
+def registerStudent():
+    form = StudentRegistrationForm()
+    if form.validate_on_submit():
+        if float(form.oldGPA.data) > 3.0:
+            user = Student(form.username.data, form.password.data)
+            user.set_email(form.email.data)
+        else:
+            user = User(form.username.data, form.password.data)
+            flash("Your application has been sent in and You will hear back soon")
+
+
+        # If user is already registered
+        if user in registered_users_table:
+            flash('Already Registered User. Please Login')
+        else:
+            if isinstance(user, Student):
+                flash('Congratulations, you are now registered as a Student')
+            else:
+                flash('Congratulations, you are now registered as a User')
+            registered_users_table.append(user)
+
+        return redirect(url_for('login'))
+    return render_template('registerStudent.html', title='Register', form=form) 
 
 # User Info Page
 @app.route("/account")
