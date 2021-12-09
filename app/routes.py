@@ -7,7 +7,7 @@ from app.database import DB
 from flask_login import current_user, login_user, logout_user, login_required
 from functools import wraps
 from werkzeug.urls import url_parse
-from collections import Counter
+
 
 
 ''' All Handlers go here. For example: 
@@ -64,14 +64,18 @@ def class_setup():
 @requires_access_level(ACCESS['student'])
 def course_registration():
     courses = registered_courses_table_nextSemester
-    cart = 0     
-    #TODO condition for instructor                                   
+    cart = 0
+    student = 0
     if isinstance(current_user, Student):
         student = current_user
         cart = current_user.shoppingCart
         if len(cart) == 0:
             cart = 0
             flash("Your Cart is empty")
+    else:
+        if student == 0:
+            flash('No Access : User is not a student')
+            return redirect(url_for('manage_course'))
     return render_template('course_registration.html', title='Course Registration',courses=courses, cart=cart,
                            student=student)
 
@@ -143,13 +147,11 @@ def instructor_classes():
     current_classes = 0
     # Show current classes if User is student
     if isinstance(current_user, Student):
-        if len(current_classes) != 0:
-            current_classes = current_user.currentClasses
+        current_classes = current_user.currentClasses
 
     # If User is Instructor
     if isinstance(current_user, Instructor):
-        if len(current_classes) != 0:
-            current_classes = current_user.current_classes
+        current_classes = current_user.current_classes
 
     if isinstance(current_user, User) and current_user in all_registrars:
         flash("You have no classes")
@@ -181,9 +183,20 @@ def assignGrade(studentUsername, courseID):
     student = User.get(studentUsername)
     course = Course.get(courseID)
     student.addGrade(data.upper(), course)
-
     return redirect(url_for('course_page', courseID=courseID))
     
+
+@app.route('/your-classes/drop-class/<string:courseID>')
+@login_required
+def dropCurrentClass(courseID):
+    course = CourseClass.get(courseID)
+    if isinstance(current_user, Student):
+        current_user.dropClass(courseID)
+        flash('You dropped a Class and will receive a grade of W')
+    else:
+        flash('Access Denied')
+        return redirect(url_for('manage_course'))
+    return redirect(url_for('instructor_classes'))
 
     
     
@@ -314,7 +327,6 @@ def registerStudent():
 @login_required
 def account():
     userPackage = userInfo()
-
     return render_template('account.html', title='User Info', packages=userPackage)
 
 
@@ -327,6 +339,7 @@ def course_history():
 
         # Show List of Past Courses
         past_courses = current_user.grades
+        current_user.evaluateGPA()
         print(current_user.grades)
 
 
@@ -337,6 +350,10 @@ def course_history():
 
     return render_template('course_history.html', title='Course History',
                            past_courses=past_courses)
+
+
+
+
 
 @app.route("/account/apply-for-grad")
 @login_required
@@ -352,6 +369,13 @@ def applyForGrad():
                            student=student)
 
 
+
+
+
+
+
+
+
 @app.route("/course_registration/register")
 @login_required
 def register_class():
@@ -361,6 +385,10 @@ def register_class():
         flash('Unable to Register for Courses : User is not a Student')
     return redirect(url_for('course_registration'))
    # return render_template('register_class.html', title='Register for Class')
+
+
+
+
 
 
 # Course Page
@@ -394,18 +422,3 @@ def complaint():
 @login_required
 def tutorial():
     return render_template('tutorial.html', title='Tutorial')
-
-@app.route("/addreview",methods=["post"])
-@login_required
-def addReview():
-    database=DB()
-    review_for = request.form.get("review_for")
-    rating = request.form.get("rating")
-    review = request.form.get("review")
-    taboo_words = database.getTabooWords()
-    word_counter = Counter(review.split(" "))
-    for word in taboo_words:
-        review = review.replace(word,"***")
-    database.insertReview(session["user_index"],review_for,rating,review)
-    return {"Message":"Review Successfully Inserted","review":review}
-
